@@ -168,7 +168,7 @@ function initCapabilities() {
     });
   });
 
-  activate("traceability");
+  activate("planning");
 }
 
 function initRollout() {
@@ -216,7 +216,7 @@ function initRollout() {
     step.addEventListener("click", () => activate(key));
   });
 
-  activate("1");
+  activate("2");
 }
 
 function initActiveNav() {
