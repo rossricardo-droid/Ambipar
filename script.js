@@ -1,9 +1,10 @@
 /*
-  Interacciones ajustadas para agregar comprensión real.
-  - Hero: cambia foco conceptual bajo los chips y activa un punto principal.
-  - Propuesta: detalle único con conceptos/beneficios extra.
-  - Capacidades: un panel resume consecuencia operativa y beneficio principal.
-  - Escalamiento: actualiza la etapa activa y la gráfica incremental.
+  Interacciones de bajo ruido:
+  - Hero: cambia foco conceptual y punto principal.
+  - Propuesta: actualiza un único panel de detalle.
+  - Capacidades: resume consecuencia operativa e impacto.
+  - Escalamiento: activa etapa y gráfica incremental.
+  - Navegación: resalta la sección visible.
 */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -13,6 +14,17 @@ document.addEventListener("DOMContentLoaded", () => {
   initRollout();
   initActiveNav();
 });
+
+function bindAdaptiveInteractions(elements, handler) {
+  const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  elements.forEach((element) => {
+    if (finePointer) {
+      element.addEventListener("mouseenter", () => handler(element));
+    }
+    element.addEventListener("focus", () => handler(element));
+    element.addEventListener("click", () => handler(element));
+  });
+}
 
 function initHeroSignals() {
   const content = {
@@ -38,13 +50,11 @@ function initHeroSignals() {
     }
   };
 
-  const pills = document.querySelectorAll(".hero-pill");
-  const points = document.querySelectorAll(".signal-point[data-signal]");
+  const pills = [...document.querySelectorAll(".hero-pill")];
+  const points = [...document.querySelectorAll(".signal-point[data-signal]")];
   const eyebrow = document.getElementById("signal-eyebrow");
   const title = document.getElementById("signal-title");
   const copy = document.getElementById("signal-copy");
-  const territory = document.querySelector(".hero .territory");
-  const detail = document.querySelector(".hero-detail");
   if (!pills.length || !points.length || !eyebrow || !title || !copy) return;
 
   const activate = (key) => {
@@ -61,23 +71,17 @@ function initHeroSignals() {
     eyebrow.textContent = content[key].eyebrow;
     title.textContent = content[key].title;
     copy.textContent = content[key].copy;
-    if (territory) territory.dataset.active = key;
-    if (detail) detail.dataset.active = key;
   };
 
-  [...pills, ...points].forEach((item) => {
-    const key = item.dataset.signal;
-    item.addEventListener("mouseenter", () => activate(key));
-    item.addEventListener("focus", () => activate(key));
-    item.addEventListener("click", () => activate(key));
-  });
+  bindAdaptiveInteractions([...pills, ...points], (element) => activate(element.dataset.signal));
+  activate("ubicacion");
 }
 
 function initFlow() {
   const content = {
     capture: {
       title: "Captura en terreno",
-      copy: "El activo emite ubicación, movimiento y eventos físicos que permiten empezar a leer su estado.",
+      copy: "Ubicación, movimiento y eventos físicos del activo para empezar a leer su estado.",
       tags: ["Ubicación", "Movimiento", "Eventos físicos"]
     },
     backend: {
@@ -92,7 +96,7 @@ function initFlow() {
     }
   };
 
-  const steps = document.querySelectorAll(".flow-step");
+  const steps = [...document.querySelectorAll(".flow-step")];
   const title = document.getElementById("flow-title");
   const copy = document.getElementById("flow-copy");
   const tags = document.getElementById("flow-tags");
@@ -110,13 +114,7 @@ function initFlow() {
     tags.innerHTML = content[key].tags.map((tag) => `<span>${tag}</span>`).join("");
   };
 
-  steps.forEach((step) => {
-    const key = step.dataset.flow;
-    step.addEventListener("mouseenter", () => activate(key));
-    step.addEventListener("focus", () => activate(key));
-    step.addEventListener("click", () => activate(key));
-  });
-
+  bindAdaptiveInteractions(steps, (step) => activate(step.dataset.flow));
   activate("capture");
 }
 
@@ -124,50 +122,51 @@ function initCapabilities() {
   const content = {
     traceability: {
       title: "Trazabilidad activa",
-      copy: "Recupera control sobre la base instalada, reduce tiempo perdido buscando activos y mejora la respuesta frente a cambios no previstos.",
-      impacts: ["↓ tiempo perdido", "↑ control operativo", "↑ credibilidad comercial"]
+      copy: "Recupera control sobre la base instalada, reduce tiempo perdido en localización y mejora la respuesta frente a movimientos no previstos.",
+      impacts: ["− Costos", "+ Clientes", "+ Foco"]
     },
     planning: {
       title: "Planificación de activos",
       copy: "Mejora disponibilidad, revisión, rotación y mantenimiento usando evidencia de uso real en vez de frecuencia fija o supuestos.",
-      impacts: ["↑ vida útil del activo", "↑ disponibilidad real", "↓ fricción operativa"]
+      impacts: ["− Fricción", "+ Vida útil", "+ Criterio"]
     },
     usage: {
       title: "Lectura de uso",
       copy: "Permite ajustar capacidad instalada, frecuencia y atención según comportamiento real por activo y por zona.",
-      impacts: ["↑ ajuste de capacidad", "↑ frecuencia correcta", "↑ conversación comercial"]
+      impacts: ["+ Ingresos", "+ Servicio", "+ Planificación"]
     },
     cleaning: {
       title: "Limpieza proactiva",
       copy: "Focaliza intervención donde más importa y evita que un activo degradado escale antes de ser atendido.",
-      impacts: ["↓ fricción operativa", "↑ oportunidad de servicio", "↓ reclamos evitables"]
+      impacts: ["− Costos", "+ Experiencia", "+ Prioridad"]
     }
   };
 
-  const cards = document.querySelectorAll(".cap-card");
+  const cards = [...document.querySelectorAll(".cap-card")];
   const title = document.getElementById("cap-title");
   const copy = document.getElementById("cap-copy");
-  const impact1 = document.getElementById("cap-impact-1");
-  const impact2 = document.getElementById("cap-impact-2");
-  const impact3 = document.getElementById("cap-impact-3");
-  if (!cards.length || !title || !copy || !impact1 || !impact2 || !impact3) return;
+  const impacts = [
+    document.getElementById("cap-impact-1"),
+    document.getElementById("cap-impact-2"),
+    document.getElementById("cap-impact-3")
+  ];
+  if (!cards.length || !title || !copy || impacts.some((item) => !item)) return;
 
   const activate = (key) => {
     cards.forEach((card) => card.classList.toggle("is-active", card.dataset.cap === key));
     title.textContent = content[key].title;
     copy.textContent = content[key].copy;
-    [impact1.textContent, impact2.textContent, impact3.textContent] = content[key].impacts;
+    impacts.forEach((item, index) => {
+      item.textContent = content[key].impacts[index];
+    });
   };
 
+  bindAdaptiveInteractions(cards, (card) => activate(card.dataset.cap));
   cards.forEach((card) => {
-    const key = card.dataset.cap;
-    card.addEventListener("mouseenter", () => activate(key));
-    card.addEventListener("focus", () => activate(key));
-    card.addEventListener("click", () => activate(key));
     card.addEventListener("keydown", (event) => {
       if (event.key === "Enter" || event.key === " ") {
         event.preventDefault();
-        activate(key);
+        activate(card.dataset.cap);
       }
     });
   });
@@ -195,7 +194,7 @@ function initRollout() {
     }
   };
 
-  const steps = document.querySelectorAll(".rollout-step");
+  const steps = [...document.querySelectorAll(".rollout-step")];
   const panel = document.getElementById("rollout-panel");
   const title = document.getElementById("rollout-title");
   const copy = document.getElementById("rollout-copy");
@@ -213,34 +212,24 @@ function initRollout() {
     panel.dataset.stage = key;
   };
 
-  steps.forEach((step) => {
-    const key = step.dataset.step;
-    step.addEventListener("mouseenter", () => activate(key));
-    step.addEventListener("focus", () => activate(key));
-    step.addEventListener("click", () => activate(key));
-  });
-
+  bindAdaptiveInteractions(steps, (step) => activate(step.dataset.step));
   activate("1");
 }
 
 function initActiveNav() {
-  const links = document.querySelectorAll(".topnav a");
-  const sections = document.querySelectorAll("main section[id]");
+  const links = [...document.querySelectorAll(".topnav a")];
+  const sections = [...document.querySelectorAll("main section[id]")];
   if (!links.length || !sections.length || !("IntersectionObserver" in window)) return;
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        const id = entry.target.id;
-        links.forEach((link) => {
-          const match = link.getAttribute("href") === `#${id}`;
-          link.style.color = match ? "var(--text)" : "var(--muted)";
-        });
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      const id = entry.target.id;
+      links.forEach((link) => {
+        link.style.color = link.getAttribute("href") === `#${id}` ? "var(--text)" : "var(--muted)";
       });
-    },
-    { threshold: 0.45, rootMargin: "-10% 0px -45% 0px" }
-  );
+    });
+  }, { threshold: 0.42, rootMargin: "-10% 0px -45% 0px" });
 
   sections.forEach((section) => observer.observe(section));
 }

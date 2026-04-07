@@ -37,9 +37,7 @@
   </header>
 
   <main>
-    <!-- HERO
-         Imagen principal: activos distribuidos emitiendo señal y mostrando intensidad de uso.
-         El detalle ya no vive sobre la imagen; ahora se muestra bajo los chips de conceptos. -->
+    <!-- HERO: visual principal con señal y nivel de uso estático. -->
     <section class="hero section" id="vision" aria-labelledby="hero-title">
       <div class="shell hero__layout">
         <div class="hero__content">
@@ -48,8 +46,6 @@
           <p class="hero__lead">Una nueva capacidad para administrar mejor activos distribuidos.</p>
           <p class="hero__support">Trazabilidad activa, lectura de uso y planificación sobre activos sanitarios en terreno.</p>
 
-          <p class="hero__bridge">Convertir señales físicas en decisiones operacionales</p>
-
           <div class="hero-pills" role="tablist" aria-label="Dimensiones de lectura sobre activos">
             <button class="hero-pill is-active" data-signal="ubicacion" role="tab" aria-selected="true">Ubicación</button>
             <button class="hero-pill" data-signal="uso" role="tab" aria-selected="false">Uso</button>
@@ -57,7 +53,7 @@
             <button class="hero-pill" data-signal="atencion" role="tab" aria-selected="false">Atención</button>
           </div>
 
-          <div class="hero-detail" data-active="ubicacion" aria-live="polite">
+          <div class="hero-detail" aria-live="polite">
             <span class="hero-detail__eyebrow" id="signal-eyebrow">Base instalada</span>
             <h2 id="signal-title">Ubicación</h2>
             <p id="signal-copy">Saber dónde está cada activo y recuperar control sobre la base instalada.</p>
@@ -65,7 +61,7 @@
         </div>
 
         <div class="hero__visual" aria-label="Activos distribuidos emitiendo señal y nivel de uso">
-          <div class="territory" data-active="ubicacion">
+          <div class="territory">
             <div class="territory__grid"></div>
             <div class="territory__path territory__path--a"></div>
             <div class="territory__path territory__path--b"></div>
@@ -73,7 +69,6 @@
             <div class="territory__zone territory__zone--b"></div>
             <div class="territory__zone territory__zone--c"></div>
 
-            <!-- Activos principales: todos emiten señal y muestran nivel de uso. -->
             <button class="signal-point is-active signal-point--high" data-signal="ubicacion" style="--x: 18%; --y: 70%;" aria-label="Activo con foco en ubicación">
               <span class="signal-point__rings" aria-hidden="true"></span>
               <span class="signal-point__core" aria-hidden="true"></span>
@@ -98,7 +93,6 @@
               <span class="signal-point__level signal-point__level--4" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
             </button>
 
-            <!-- Activos secundarios para sugerir base instalada más amplia. -->
             <div class="signal-ghost signal-ghost--mid" style="--x: 58%; --y: 73%;" aria-hidden="true"></div>
             <div class="signal-ghost signal-ghost--low" style="--x: 29%; --y: 28%;" aria-hidden="true"></div>
             <div class="signal-ghost signal-ghost--mid" style="--x: 73%; --y: 57%;" aria-hidden="true"></div>
@@ -108,8 +102,7 @@
       </div>
     </section>
 
-    <!-- PROPUESTA
-         Se simplifican las tarjetas. Solo quedan concepto central y una línea visible. -->
+    <!-- PROPUESTA -->
     <section class="proposal section" id="proposal" aria-labelledby="proposal-title">
       <div class="shell">
         <div class="section-head section-head--tight">
@@ -153,8 +146,7 @@
       </div>
     </section>
 
-    <!-- CAPACIDADES
-         Tarjetas más limpias; el detalle vive en un panel único. -->
+    <!-- CAPACIDADES -->
     <section class="capabilities section" id="capabilities" aria-labelledby="capabilities-title">
       <div class="shell">
         <div class="section-head section-head--tight section-head--capabilities">
@@ -166,52 +158,51 @@
         </div>
 
         <div class="cap-grid" role="list" aria-label="Capacidades clave">
-          <article class="cap-card cap-card--primary" data-cap="traceability" role="listitem" tabindex="0">
+          <article class="cap-card cap-card--primary is-active" data-cap="traceability" role="listitem" tabindex="0">
             <span class="cap-card__badge">Prioridad</span>
             <h3>Trazabilidad activa</h3>
-            <p>Ubicación, control y recuperación</p>
-            <span class="cap-card__hint">Saber dónde está y qué cambió</span>
+            <p>Control de activos</p>
+            <span class="cap-card__hint">Localización y cambios relevantes</span>
           </article>
 
-          <article class="cap-card cap-card--primary is-active" data-cap="planning" role="listitem" tabindex="0">
+          <article class="cap-card cap-card--primary" data-cap="planning" role="listitem" tabindex="0">
             <span class="cap-card__badge">Prioridad</span>
             <h3>Planificación de activos</h3>
-            <p>Disponibilidad, rotación y vida útil</p>
-            <span class="cap-card__hint">Decidir mejor cuándo mover, revisar o mantener</span>
+            <p>Disponibilidad y vida útil</p>
+            <span class="cap-card__hint">Rotación, revisión y mantenimiento</span>
           </article>
 
           <article class="cap-card" data-cap="usage" role="listitem" tabindex="0">
             <span class="cap-card__badge">Complementaria</span>
             <h3>Lectura de uso</h3>
-            <p>Frecuencia real y ajuste de capacidad</p>
-            <span class="cap-card__hint">Entender cuánto se usa cada activo y dónde</span>
+            <p>Frecuencia y criterio</p>
+            <span class="cap-card__hint">Uso real por activo y por zona</span>
           </article>
 
           <article class="cap-card" data-cap="cleaning" role="listitem" tabindex="0">
             <span class="cap-card__badge">Complementaria</span>
             <h3>Limpieza proactiva</h3>
-            <p>Atención antes del deterioro</p>
-            <span class="cap-card__hint">Intervenir antes de que el problema escale</span>
+            <p>Foco donde más importa</p>
+            <span class="cap-card__hint">Atención antes del deterioro</span>
           </article>
         </div>
 
         <div class="cap-panel" aria-live="polite">
           <div class="cap-panel__content">
             <span class="cap-panel__eyebrow">Consecuencia operativa</span>
-            <h3 id="cap-title">Planificación de activos</h3>
-            <p id="cap-copy">Mejora disponibilidad, revisión, rotación y mantenimiento usando evidencia de uso real en vez de frecuencia fija o supuestos.</p>
+            <h3 id="cap-title">Trazabilidad activa</h3>
+            <p id="cap-copy">Reduce tiempo perdido buscando activos, recupera control sobre la base instalada y mejora la conversación con el cliente.</p>
           </div>
           <div class="cap-panel__impacts">
-            <span id="cap-impact-1">↑ vida útil del activo</span>
-            <span id="cap-impact-2">↑ disponibilidad real</span>
-            <span id="cap-impact-3">↓ fricción operativa</span>
+            <span id="cap-impact-1">− Costos</span>
+            <span id="cap-impact-2">+ Clientes</span>
+            <span id="cap-impact-3">+ Foco</span>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ESCALAMIENTO
-         El panel activo incluye una gráfica simple de crecimiento iterativo / incremental. -->
+    <!-- ESCALAMIENTO -->
     <section class="scaling section" id="scaling" aria-labelledby="scaling-title">
       <div class="shell">
         <div class="section-head section-head--tight">
@@ -254,12 +245,12 @@
             <div class="rollout-graphic" aria-hidden="true">
               <div class="rollout-graphic__label">Escalabilidad iterativa / incremental</div>
               <div class="rollout-graphic__bars">
-                <span class="is-active"></span>
+                <span></span>
                 <span></span>
                 <span></span>
                 <span></span>
               </div>
-              <div class="rollout-graphic__curve"></div>
+              <div class="rollout-graphic__baseline"></div>
             </div>
           </div>
 
@@ -274,16 +265,15 @@
       </div>
     </section>
 
-    <!-- CIERRE
-         Recupera la imagen del inicio para cerrar el arco narrativo. -->
+    <!-- CIERRE -->
     <section class="closing section" id="closing" aria-labelledby="closing-title">
       <div class="shell closing__layout">
         <div class="closing__statement">
           <p class="eyebrow">Cierre</p>
           <h2 id="closing-title">El primer paso en el camino de activos inteligentes</h2>
-          <p class="closing__lead">Trazabilidad activa, lectura de uso y planificación para administrar mejor activos distribuidos.</p>
-          <p class="closing__body">No es solo una capa digital más. Es una nueva forma de administrar activos con señales legibles, prioridades más claras y mejor criterio operacional.</p>
-          <div class="closing__emphasis">Una nueva forma de administrar activos</div>
+          <p class="closing__lead">Una nueva capacidad para administrar activos sanitarios con trazabilidad activa, lectura de uso y planificación de activos.</p>
+          <p class="closing__body">No estamos proponiendo solo monitoreo ni solo tecnología. Estamos proponiendo una forma distinta de administrar activos distribuidos y convertir señales físicas en decisiones operacionales.</p>
+          <div class="closing__emphasis">Una nueva capacidad para Ambipar</div>
           <a class="closing__cta" href="#proposal">Revisar propuesta de implementación</a>
         </div>
 
@@ -295,13 +285,32 @@
             <div class="territory__zone territory__zone--a"></div>
             <div class="territory__zone territory__zone--b"></div>
             <div class="territory__zone territory__zone--c"></div>
-            <div class="signal-ghost signal-ghost--mid" style="--x: 18%; --y: 70%;"></div>
-            <div class="signal-ghost signal-ghost--mid" style="--x: 38%; --y: 52%;"></div>
-            <div class="signal-ghost signal-ghost--mid" style="--x: 62%; --y: 35%;"></div>
-            <div class="signal-ghost signal-ghost--mid" style="--x: 80%; --y: 23%;"></div>
-            <div class="signal-ghost signal-ghost--low" style="--x: 58%; --y: 73%;"></div>
+
+            <div class="signal-point signal-point--high signal-point--static" style="--x: 18%; --y: 70%;">
+              <span class="signal-point__rings"></span>
+              <span class="signal-point__core"></span>
+              <span class="signal-point__level signal-point__level--4"><i></i><i></i><i></i><i></i></span>
+            </div>
+            <div class="signal-point signal-point--mid signal-point--static" style="--x: 38%; --y: 52%;">
+              <span class="signal-point__rings"></span>
+              <span class="signal-point__core"></span>
+              <span class="signal-point__level signal-point__level--3"><i></i><i></i><i></i><i></i></span>
+            </div>
+            <div class="signal-point signal-point--mid signal-point--static" style="--x: 62%; --y: 35%;">
+              <span class="signal-point__rings"></span>
+              <span class="signal-point__core"></span>
+              <span class="signal-point__level signal-point__level--2"><i></i><i></i><i></i><i></i></span>
+            </div>
+            <div class="signal-point signal-point--high signal-point--static" style="--x: 80%; --y: 23%;">
+              <span class="signal-point__rings"></span>
+              <span class="signal-point__core"></span>
+              <span class="signal-point__level signal-point__level--4"><i></i><i></i><i></i><i></i></span>
+            </div>
+
+            <div class="signal-ghost signal-ghost--mid" style="--x: 58%; --y: 73%;"></div>
             <div class="signal-ghost signal-ghost--low" style="--x: 29%; --y: 28%;"></div>
-            <div class="signal-ghost signal-ghost--low" style="--x: 73%; --y: 57%;"></div>
+            <div class="signal-ghost signal-ghost--mid" style="--x: 73%; --y: 57%;"></div>
+            <div class="signal-ghost signal-ghost--low" style="--x: 10%; --y: 41%;"></div>
           </div>
         </div>
       </div>
