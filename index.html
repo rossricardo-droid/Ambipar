@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles_producto_fresco.css" />
 </head>
 <body>
   <div class="site-bg" aria-hidden="true">
@@ -143,6 +143,138 @@
           <p id="flow-copy">Ubicación, movimiento y eventos físicos del activo para empezar a leer su estado.</p>
           <div class="flow-tags" id="flow-tags"></div>
         </div>
+      </div>
+    </section>
+
+
+
+    <!-- PRODUCTO VISIBLE: qué vería Ambipar en operación real -->
+    <section class="product section" id="product" aria-labelledby="product-title">
+      <div class="shell">
+        <div class="section-head section-head--tight section-head--product">
+          <div>
+            <p class="eyebrow">Sistema visible</p>
+            <h2 id="product-title">Cómo se ve esto en la operación real</h2>
+          </div>
+          <p class="section-head__side">Una primera expresión del sistema: visibilidad ejecutiva, criterio operativo y planificación de activos sobre base instalada.</p>
+        </div>
+
+        <div class="product-shell">
+          <div class="product-tabs" role="tablist" aria-label="Vistas del sistema">
+            <button class="product-tab is-active" data-view="executive" aria-selected="true">Dashboard ejecutivo</button>
+            <button class="product-tab" data-view="zone" aria-selected="false">Vista por zona</button>
+            <button class="product-tab" data-view="planning" aria-selected="false">Planificación de activos</button>
+          </div>
+
+          <div class="product-stage" id="product-stage" data-view="executive">
+            <div class="product-screen product-screen--main" aria-live="polite">
+              <div class="product-screen__top">
+                <div>
+                  <span class="product-screen__label" id="product-label">Supervisor / visión general</span>
+                  <h3 id="product-view-title">Prioridad operativa sobre base instalada</h3>
+                </div>
+                <div class="product-screen__status" id="product-status">Zona norte · 124 activos visibles</div>
+              </div>
+
+              <div class="product-kpis">
+                <article>
+                  <span>Activos visibles</span>
+                  <strong id="kpi-1">124</strong>
+                  <small>Cobertura sobre zona activa</small>
+                </article>
+                <article>
+                  <span>Alta prioridad</span>
+                  <strong id="kpi-2">18</strong>
+                  <small>Atención antes de escalar</small>
+                </article>
+                <article>
+                  <span>Revisión sugerida</span>
+                  <strong id="kpi-3">7</strong>
+                  <small>Fuera de patrón o bajo uso</small>
+                </article>
+              </div>
+
+              <div class="product-screen__body">
+                <div class="product-map" id="product-map" aria-hidden="true">
+                  <span class="product-map__zone product-map__zone--a"></span>
+                  <span class="product-map__zone product-map__zone--b"></span>
+                  <span class="product-map__zone product-map__zone--c"></span>
+                  <span class="product-map__point product-map__point--hot" style="--x:18%; --y:66%"></span>
+                  <span class="product-map__point product-map__point--mid" style="--x:36%; --y:44%"></span>
+                  <span class="product-map__point product-map__point--hot" style="--x:54%; --y:52%"></span>
+                  <span class="product-map__point product-map__point--low" style="--x:72%; --y:28%"></span>
+                  <span class="product-map__point product-map__point--mid" style="--x:83%; --y:56%"></span>
+                </div>
+
+                <div class="product-sidecard" id="product-sidecard">
+                  <span class="product-sidecard__label">Lectura activa</span>
+                  <h4 id="product-side-title">Ranking diario de prioridad</h4>
+                  <ul class="product-list" id="product-list">
+                    <li><span>Activo 14 · Zona norte</span><strong>Uso alto + desviación</strong></li>
+                    <li><span>Activo 27 · Acceso obra</span><strong>Movimiento no previsto</strong></li>
+                    <li><span>Activo 08 · Patio B</span><strong>Bajo uso sostenido</strong></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <aside class="product-explain">
+              <span class="product-explain__eyebrow">Diferencial del sistema</span>
+              <p id="product-copy">No solo muestra ubicación. Lee señales del activo, las convierte en criterio operativo y recomienda dónde actuar primero.</p>
+              <div class="product-chips" id="product-chips">
+                <span>Alertas proactivas</span>
+                <span>Criticidad por zona</span>
+                <span>Recomendación operativa</span>
+              </div>
+            </aside>
+          </div>
+        </div>
+
+        <div class="scenario-block">
+          <div class="scenario-block__head">
+            <p class="eyebrow">Casos prácticos</p>
+            <h3>Ejemplos de cómo baja a operación</h3>
+          </div>
+
+          <div class="scenario-tabs" role="tablist" aria-label="Escenarios operativos">
+            <button class="scenario-tab is-active" data-case="displaced" aria-selected="true">Activo desplazado</button>
+            <button class="scenario-tab" data-case="priority" aria-selected="false">Ruta de limpieza</button>
+            <button class="scenario-tab" data-case="capacity" aria-selected="false">Ajuste de capacidad</button>
+            <button class="scenario-tab" data-case="revision" aria-selected="false">Revisión sugerida</button>
+          </div>
+
+          <div class="scenario-panel" aria-live="polite">
+            <div class="scenario-panel__kicker" id="scenario-kicker">Caso real</div>
+            <h4 id="scenario-title">Un activo fue movido dentro de la obra</h4>
+            <p id="scenario-copy">El sistema detecta cambio de posición, actualiza la localización y evita tiempo perdido buscando el activo en terreno.</p>
+            <div class="scenario-impact" id="scenario-impact">
+              <span>↓ tiempo perdido</span>
+              <span>↑ control operativo</span>
+              <span>↑ trazabilidad</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="metric-strip" aria-label="Métricas ilustrativas">
+          <article class="metric-card">
+            <span class="metric-card__value">↓ 20–35%</span>
+            <p>referencia teórica de tiempo perdido buscando activos</p>
+          </article>
+          <article class="metric-card">
+            <span class="metric-card__value">↑ 15–30%</span>
+            <p>mejora potencial en focalización de limpieza diaria</p>
+          </article>
+          <article class="metric-card">
+            <span class="metric-card__value">↓ 10–25%</span>
+            <p>intervenciones innecesarias por frecuencia fija</p>
+          </article>
+          <article class="metric-card">
+            <span class="metric-card__value">↑ visibilidad</span>
+            <p>sobre uso real, criticidad y ajuste de capacidad instalada</p>
+          </article>
+        </div>
+
+        <p class="metric-note">Métricas ilustrativas de referencia para conversación inicial. No constituyen promesa contractual y deben validarse en piloto.</p>
       </div>
     </section>
 
@@ -317,6 +449,6 @@
     </section>
   </main>
 
-  <script src="script.js"></script>
+  <script src="script_producto_fresco.js"></script>
 </body>
 </html>

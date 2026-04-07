@@ -10,6 +10,8 @@
 document.addEventListener("DOMContentLoaded", () => {
   initHeroSignals();
   initFlow();
+  initProductViews();
+  initScenarios();
   initCapabilities();
   initRollout();
   initActiveNav();
@@ -232,4 +234,141 @@ function initActiveNav() {
   }, { threshold: 0.42, rootMargin: "-10% 0px -45% 0px" });
 
   sections.forEach((section) => observer.observe(section));
+}
+
+
+function initProductViews() {
+  const views = {
+    executive: {
+      label: 'Supervisor / visión general',
+      title: 'Prioridad operativa sobre base instalada',
+      status: 'Zona norte · 124 activos visibles',
+      kpis: ['124', '18', '7'],
+      sideTitle: 'Ranking diario de prioridad',
+      list: [
+        ['Activo 14 · Zona norte', 'Uso alto + desviación'],
+        ['Activo 27 · Acceso obra', 'Movimiento no previsto'],
+        ['Activo 08 · Patio B', 'Bajo uso sostenido']
+      ],
+      copy: 'No solo muestra ubicación. Lee señales del activo, las convierte en criterio operativo y recomienda dónde actuar primero.',
+      chips: ['Alertas proactivas', 'Criticidad por zona', 'Recomendación operativa']
+    },
+    zone: {
+      label: 'Supervisor / lectura territorial',
+      title: 'Qué zonas requieren atención antes',
+      status: 'Zona sur · criticidad comparada',
+      kpis: ['3', '11', '2'],
+      sideTitle: 'Alertas que cambian la ruta',
+      list: [
+        ['Zona sur · Frente 3', 'Sube al inicio de ruta'],
+        ['Zona norte · Patio A', 'Mantiene frecuencia'],
+        ['Zona centro · Faena móvil', 'Revisar desplazamiento']
+      ],
+      copy: 'Permite leer criticidad por zona, comparar comportamiento y priorizar recursos donde el uso y el contexto lo exigen.',
+      chips: ['Vista territorial', 'Orden de atención', 'Foco por criticidad']
+    },
+    planning: {
+      label: 'Jefatura / planificación de activos',
+      title: 'Disponibilidad, revisión y ajuste de capacidad',
+      status: 'Base instalada · recomendación semanal',
+      kpis: ['9', '5', '12'],
+      sideTitle: 'Sugerencias de planificación',
+      list: [
+        ['Activo 05 · Bajo uso', 'Evaluar reubicación'],
+        ['Activo 31 · Uso extremo', 'Entrar a revisión'],
+        ['Zona norte · Demanda alta', 'Agregar 2 activos']
+      ],
+      copy: 'La planificación deja de depender de supuestos fijos: el sistema sugiere rotación, revisión y ajuste de capacidad con evidencia.',
+      chips: ['Rotación sugerida', 'Vida útil', 'Ajuste de capacidad']
+    }
+  };
+
+  const tabs = [...document.querySelectorAll('.product-tab')];
+  if (!tabs.length) return;
+  const stage = document.getElementById('product-stage');
+  const ids = {
+    label: document.getElementById('product-label'),
+    title: document.getElementById('product-view-title'),
+    status: document.getElementById('product-status'),
+    k1: document.getElementById('kpi-1'),
+    k2: document.getElementById('kpi-2'),
+    k3: document.getElementById('kpi-3'),
+    sideTitle: document.getElementById('product-side-title'),
+    list: document.getElementById('product-list'),
+    copy: document.getElementById('product-copy'),
+    chips: document.getElementById('product-chips')
+  };
+
+  const activate = (key) => {
+    const v = views[key];
+    tabs.forEach((tab) => {
+      const active = tab.dataset.view === key;
+      tab.classList.toggle('is-active', active);
+      tab.setAttribute('aria-selected', String(active));
+    });
+    stage.dataset.view = key;
+    ids.label.textContent = v.label;
+    ids.title.textContent = v.title;
+    ids.status.textContent = v.status;
+    ids.k1.textContent = v.kpis[0];
+    ids.k2.textContent = v.kpis[1];
+    ids.k3.textContent = v.kpis[2];
+    ids.sideTitle.textContent = v.sideTitle;
+    ids.list.innerHTML = v.list.map(item => `<li><span>${item[0]}</span><strong>${item[1]}</strong></li>`).join('');
+    ids.copy.textContent = v.copy;
+    ids.chips.innerHTML = v.chips.map(chip => `<span>${chip}</span>`).join('');
+  };
+
+  bindAdaptiveInteractions(tabs, (tab) => activate(tab.dataset.view));
+  activate('executive');
+}
+
+function initScenarios() {
+  const content = {
+    displaced: {
+      kicker: 'Caso real',
+      title: 'Un activo fue movido dentro de la obra',
+      copy: 'El sistema detecta cambio de posición, actualiza la localización y evita tiempo perdido buscando el activo en terreno.',
+      impacts: ['↓ tiempo perdido', '↑ control operativo', '↑ trazabilidad']
+    },
+    priority: {
+      kicker: 'Caso real',
+      title: 'Una alerta cambia el orden de limpieza del día',
+      copy: 'Un activo sube en criticidad por uso alto y pasa adelante en la ruta, aunque no estaba primero en la frecuencia original.',
+      impacts: ['↑ foco operativo', '↓ fricción operativa', '↑ servicio oportuno']
+    },
+    capacity: {
+      kicker: 'Caso real',
+      title: 'La zona sugiere más o menos activos',
+      copy: 'El uso real por zona permite recomendar aumento, reducción o reubicación de activos según demanda observada.',
+      impacts: ['↑ ajuste de capacidad', '↑ credibilidad comercial', '↓ intervenciones vacías']
+    },
+    revision: {
+      kicker: 'Caso real',
+      title: 'Un activo entra a revisión por comportamiento fuera de patrón',
+      copy: 'Bajo uso sostenido o señales atípicas sugieren mala ubicación, deterioro o necesidad de mantenimiento.',
+      impacts: ['↑ vida útil del activo', '↑ disponibilidad', '↓ deterioro no detectado']
+    }
+  };
+  const tabs = [...document.querySelectorAll('.scenario-tab')];
+  if (!tabs.length) return;
+  const kicker = document.getElementById('scenario-kicker');
+  const title = document.getElementById('scenario-title');
+  const copy = document.getElementById('scenario-copy');
+  const impact = document.getElementById('scenario-impact');
+
+  const activate = (key) => {
+    const c = content[key];
+    tabs.forEach((tab) => {
+      const active = tab.dataset.case === key;
+      tab.classList.toggle('is-active', active);
+      tab.setAttribute('aria-selected', String(active));
+    });
+    kicker.textContent = c.kicker;
+    title.textContent = c.title;
+    copy.textContent = c.copy;
+    impact.innerHTML = c.impacts.map(item => `<span>${item}</span>`).join('');
+  };
+  bindAdaptiveInteractions(tabs, (tab) => activate(tab.dataset.case));
+  activate('displaced');
 }
