@@ -1,18 +1,32 @@
 /*
-  Interacciones ajustadas para agregar comprensión real.
-  - Hero: cambia foco conceptual bajo los chips y activa un punto principal.
-  - Propuesta: detalle único con conceptos/beneficios extra.
-  - Capacidades: un panel resume consecuencia operativa y beneficio principal.
-  - Escalamiento: actualiza la etapa activa y la gráfica incremental.
+  Interacciones de bajo ruido:
+  - Hero: cambia foco conceptual y punto principal.
+  - Propuesta: actualiza un único panel de detalle.
+  - Capacidades: resume consecuencia operativa e impacto.
+  - Escalamiento: activa etapa y gráfica incremental.
+  - Navegación: resalta la sección visible.
 */
 
 document.addEventListener("DOMContentLoaded", () => {
   initHeroSignals();
   initFlow();
+  initProductViews();
+  initScenarios();
   initCapabilities();
   initRollout();
   initActiveNav();
 });
+
+function bindAdaptiveInteractions(elements, handler) {
+  const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  elements.forEach((element) => {
+    if (finePointer) {
+      element.addEventListener("mouseenter", () => handler(element));
+    }
+    element.addEventListener("focus", () => handler(element));
+    element.addEventListener("click", () => handler(element));
+  });
+}
 
 function initHeroSignals() {
   const content = {
@@ -38,8 +52,8 @@ function initHeroSignals() {
     }
   };
 
-  const pills = document.querySelectorAll(".hero-pill");
-  const points = document.querySelectorAll(".signal-point[data-signal]");
+  const pills = [...document.querySelectorAll(".hero-pill")];
+  const points = [...document.querySelectorAll(".signal-point[data-signal]")];
   const eyebrow = document.getElementById("signal-eyebrow");
   const title = document.getElementById("signal-title");
   const copy = document.getElementById("signal-copy");
@@ -61,19 +75,15 @@ function initHeroSignals() {
     copy.textContent = content[key].copy;
   };
 
-  [...pills, ...points].forEach((item) => {
-    const key = item.dataset.signal;
-    item.addEventListener("mouseenter", () => activate(key));
-    item.addEventListener("focus", () => activate(key));
-    item.addEventListener("click", () => activate(key));
-  });
+  bindAdaptiveInteractions([...pills, ...points], (element) => activate(element.dataset.signal));
+  activate("ubicacion");
 }
 
 function initFlow() {
   const content = {
     capture: {
       title: "Captura en terreno",
-      copy: "El activo emite ubicación, movimiento y eventos físicos que permiten empezar a leer su estado.",
+      copy: "Ubicación, movimiento y eventos físicos del activo para empezar a leer su estado.",
       tags: ["Ubicación", "Movimiento", "Eventos físicos"]
     },
     backend: {
@@ -88,7 +98,7 @@ function initFlow() {
     }
   };
 
-  const steps = document.querySelectorAll(".flow-step");
+  const steps = [...document.querySelectorAll(".flow-step")];
   const title = document.getElementById("flow-title");
   const copy = document.getElementById("flow-copy");
   const tags = document.getElementById("flow-tags");
@@ -106,13 +116,7 @@ function initFlow() {
     tags.innerHTML = content[key].tags.map((tag) => `<span>${tag}</span>`).join("");
   };
 
-  steps.forEach((step) => {
-    const key = step.dataset.flow;
-    step.addEventListener("mouseenter", () => activate(key));
-    step.addEventListener("focus", () => activate(key));
-    step.addEventListener("click", () => activate(key));
-  });
-
+  bindAdaptiveInteractions(steps, (step) => activate(step.dataset.flow));
   activate("capture");
 }
 
@@ -140,35 +144,36 @@ function initCapabilities() {
     }
   };
 
-  const cards = document.querySelectorAll(".cap-card");
+  const cards = [...document.querySelectorAll(".cap-card")];
   const title = document.getElementById("cap-title");
   const copy = document.getElementById("cap-copy");
-  const impact1 = document.getElementById("cap-impact-1");
-  const impact2 = document.getElementById("cap-impact-2");
-  const impact3 = document.getElementById("cap-impact-3");
-  if (!cards.length || !title || !copy || !impact1 || !impact2 || !impact3) return;
+  const impacts = [
+    document.getElementById("cap-impact-1"),
+    document.getElementById("cap-impact-2"),
+    document.getElementById("cap-impact-3")
+  ];
+  if (!cards.length || !title || !copy || impacts.some((item) => !item)) return;
 
   const activate = (key) => {
     cards.forEach((card) => card.classList.toggle("is-active", card.dataset.cap === key));
     title.textContent = content[key].title;
     copy.textContent = content[key].copy;
-    [impact1.textContent, impact2.textContent, impact3.textContent] = content[key].impacts;
+    impacts.forEach((item, index) => {
+      item.textContent = content[key].impacts[index];
+    });
   };
 
+  bindAdaptiveInteractions(cards, (card) => activate(card.dataset.cap));
   cards.forEach((card) => {
-    const key = card.dataset.cap;
-    card.addEventListener("mouseenter", () => activate(key));
-    card.addEventListener("focus", () => activate(key));
-    card.addEventListener("click", () => activate(key));
     card.addEventListener("keydown", (event) => {
       if (event.key === "Enter" || event.key === " ") {
         event.preventDefault();
-        activate(key);
+        activate(card.dataset.cap);
       }
     });
   });
 
-  activate("traceability");
+  activate("planning");
 }
 
 function initRollout() {
@@ -191,7 +196,7 @@ function initRollout() {
     }
   };
 
-  const steps = document.querySelectorAll(".rollout-step");
+  const steps = [...document.querySelectorAll(".rollout-step")];
   const panel = document.getElementById("rollout-panel");
   const title = document.getElementById("rollout-title");
   const copy = document.getElementById("rollout-copy");
@@ -209,34 +214,161 @@ function initRollout() {
     panel.dataset.stage = key;
   };
 
-  steps.forEach((step) => {
-    const key = step.dataset.step;
-    step.addEventListener("mouseenter", () => activate(key));
-    step.addEventListener("focus", () => activate(key));
-    step.addEventListener("click", () => activate(key));
-  });
-
+  bindAdaptiveInteractions(steps, (step) => activate(step.dataset.step));
   activate("1");
 }
 
 function initActiveNav() {
-  const links = document.querySelectorAll(".topnav a");
-  const sections = document.querySelectorAll("main section[id]");
+  const links = [...document.querySelectorAll(".topnav a")];
+  const sections = [...document.querySelectorAll("main section[id]")];
   if (!links.length || !sections.length || !("IntersectionObserver" in window)) return;
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        const id = entry.target.id;
-        links.forEach((link) => {
-          const match = link.getAttribute("href") === `#${id}`;
-          link.style.color = match ? "var(--text)" : "var(--muted)";
-        });
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      const id = entry.target.id;
+      links.forEach((link) => {
+        link.style.color = link.getAttribute("href") === `#${id}` ? "var(--text)" : "var(--muted)";
       });
-    },
-    { threshold: 0.45, rootMargin: "-10% 0px -45% 0px" }
-  );
+    });
+  }, { threshold: 0.42, rootMargin: "-10% 0px -45% 0px" });
 
   sections.forEach((section) => observer.observe(section));
+}
+
+
+function initProductViews() {
+  const views = {
+    executive: {
+      label: 'Supervisor / visión general',
+      title: 'Prioridad operativa sobre base instalada',
+      status: 'Zona norte · 124 activos visibles',
+      kpis: ['124', '18', '7'],
+      sideTitle: 'Ranking diario de prioridad',
+      list: [
+        ['Activo 14 · Zona norte', 'Uso alto + desviación'],
+        ['Activo 27 · Acceso obra', 'Movimiento no previsto'],
+        ['Activo 08 · Patio B', 'Bajo uso sostenido']
+      ],
+      copy: 'No solo muestra ubicación. Lee señales del activo, las convierte en criterio operativo y recomienda dónde actuar primero.',
+      chips: ['Alertas proactivas', 'Criticidad por zona', 'Recomendación operativa']
+    },
+    zone: {
+      label: 'Supervisor / lectura territorial',
+      title: 'Qué zonas requieren atención antes',
+      status: 'Zona sur · criticidad comparada',
+      kpis: ['3', '11', '2'],
+      sideTitle: 'Alertas que cambian la ruta',
+      list: [
+        ['Zona sur · Frente 3', 'Sube al inicio de ruta'],
+        ['Zona norte · Patio A', 'Mantiene frecuencia'],
+        ['Zona centro · Faena móvil', 'Revisar desplazamiento']
+      ],
+      copy: 'Permite leer criticidad por zona, comparar comportamiento y priorizar recursos donde el uso y el contexto lo exigen.',
+      chips: ['Vista territorial', 'Orden de atención', 'Foco por criticidad']
+    },
+    planning: {
+      label: 'Jefatura / planificación de activos',
+      title: 'Disponibilidad, revisión y ajuste de capacidad',
+      status: 'Base instalada · recomendación semanal',
+      kpis: ['9', '5', '12'],
+      sideTitle: 'Sugerencias de planificación',
+      list: [
+        ['Activo 05 · Bajo uso', 'Evaluar reubicación'],
+        ['Activo 31 · Uso extremo', 'Entrar a revisión'],
+        ['Zona norte · Demanda alta', 'Agregar 2 activos']
+      ],
+      copy: 'La planificación deja de depender de supuestos fijos: el sistema sugiere rotación, revisión y ajuste de capacidad con evidencia.',
+      chips: ['Rotación sugerida', 'Vida útil', 'Ajuste de capacidad']
+    }
+  };
+
+  const tabs = [...document.querySelectorAll('.product-tab')];
+  if (!tabs.length) return;
+  const stage = document.getElementById('product-stage');
+  const ids = {
+    label: document.getElementById('product-label'),
+    title: document.getElementById('product-view-title'),
+    status: document.getElementById('product-status'),
+    k1: document.getElementById('kpi-1'),
+    k2: document.getElementById('kpi-2'),
+    k3: document.getElementById('kpi-3'),
+    sideTitle: document.getElementById('product-side-title'),
+    list: document.getElementById('product-list'),
+    copy: document.getElementById('product-copy'),
+    chips: document.getElementById('product-chips')
+  };
+
+  const activate = (key) => {
+    const v = views[key];
+    tabs.forEach((tab) => {
+      const active = tab.dataset.view === key;
+      tab.classList.toggle('is-active', active);
+      tab.setAttribute('aria-selected', String(active));
+    });
+    stage.dataset.view = key;
+    ids.label.textContent = v.label;
+    ids.title.textContent = v.title;
+    ids.status.textContent = v.status;
+    ids.k1.textContent = v.kpis[0];
+    ids.k2.textContent = v.kpis[1];
+    ids.k3.textContent = v.kpis[2];
+    ids.sideTitle.textContent = v.sideTitle;
+    ids.list.innerHTML = v.list.map(item => `<li><span>${item[0]}</span><strong>${item[1]}</strong></li>`).join('');
+    ids.copy.textContent = v.copy;
+    ids.chips.innerHTML = v.chips.map(chip => `<span>${chip}</span>`).join('');
+  };
+
+  bindAdaptiveInteractions(tabs, (tab) => activate(tab.dataset.view));
+  activate('executive');
+}
+
+function initScenarios() {
+  const content = {
+    displaced: {
+      kicker: 'Caso real',
+      title: 'Un activo fue movido dentro de la obra',
+      copy: 'El sistema detecta cambio de posición, actualiza la localización y evita tiempo perdido buscando el activo en terreno.',
+      impacts: ['↓ tiempo perdido', '↑ control operativo', '↑ trazabilidad']
+    },
+    priority: {
+      kicker: 'Caso real',
+      title: 'Una alerta cambia el orden de limpieza del día',
+      copy: 'Un activo sube en criticidad por uso alto y pasa adelante en la ruta, aunque no estaba primero en la frecuencia original.',
+      impacts: ['↑ foco operativo', '↓ fricción operativa', '↑ servicio oportuno']
+    },
+    capacity: {
+      kicker: 'Caso real',
+      title: 'La zona sugiere más o menos activos',
+      copy: 'El uso real por zona permite recomendar aumento, reducción o reubicación de activos según demanda observada.',
+      impacts: ['↑ ajuste de capacidad', '↑ credibilidad comercial', '↓ intervenciones vacías']
+    },
+    revision: {
+      kicker: 'Caso real',
+      title: 'Un activo entra a revisión por comportamiento fuera de patrón',
+      copy: 'Bajo uso sostenido o señales atípicas sugieren mala ubicación, deterioro o necesidad de mantenimiento.',
+      impacts: ['↑ vida útil del activo', '↑ disponibilidad', '↓ deterioro no detectado']
+    }
+  };
+  const tabs = [...document.querySelectorAll('.scenario-tab')];
+  if (!tabs.length) return;
+  const kicker = document.getElementById('scenario-kicker');
+  const title = document.getElementById('scenario-title');
+  const copy = document.getElementById('scenario-copy');
+  const impact = document.getElementById('scenario-impact');
+
+  const activate = (key) => {
+    const c = content[key];
+    tabs.forEach((tab) => {
+      const active = tab.dataset.case === key;
+      tab.classList.toggle('is-active', active);
+      tab.setAttribute('aria-selected', String(active));
+    });
+    kicker.textContent = c.kicker;
+    title.textContent = c.title;
+    copy.textContent = c.copy;
+    impact.innerHTML = c.impacts.map(item => `<span>${item}</span>`).join('');
+  };
+  bindAdaptiveInteractions(tabs, (tab) => activate(tab.dataset.case));
+  activate('displaced');
 }
