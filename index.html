@@ -37,7 +37,9 @@
   </header>
 
   <main>
-    <!-- HERO: visual principal con señal y nivel de uso estático. -->
+    <!-- HERO
+         Imagen principal: activos distribuidos emitiendo señal y mostrando intensidad de uso.
+         El detalle ya no vive sobre la imagen; ahora se muestra bajo los chips de conceptos. -->
     <section class="hero section" id="vision" aria-labelledby="hero-title">
       <div class="shell hero__layout">
         <div class="hero__content">
@@ -69,6 +71,7 @@
             <div class="territory__zone territory__zone--b"></div>
             <div class="territory__zone territory__zone--c"></div>
 
+            <!-- Activos principales: todos emiten señal y muestran nivel de uso. -->
             <button class="signal-point is-active signal-point--high" data-signal="ubicacion" style="--x: 18%; --y: 70%;" aria-label="Activo con foco en ubicación">
               <span class="signal-point__rings" aria-hidden="true"></span>
               <span class="signal-point__core" aria-hidden="true"></span>
@@ -93,6 +96,7 @@
               <span class="signal-point__level signal-point__level--4" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
             </button>
 
+            <!-- Activos secundarios para sugerir base instalada más amplia. -->
             <div class="signal-ghost signal-ghost--mid" style="--x: 58%; --y: 73%;" aria-hidden="true"></div>
             <div class="signal-ghost signal-ghost--low" style="--x: 29%; --y: 28%;" aria-hidden="true"></div>
             <div class="signal-ghost signal-ghost--mid" style="--x: 73%; --y: 57%;" aria-hidden="true"></div>
@@ -102,7 +106,8 @@
       </div>
     </section>
 
-    <!-- PROPUESTA -->
+    <!-- PROPUESTA
+         Se simplifican las tarjetas. Solo quedan concepto central y una línea visible. -->
     <section class="proposal section" id="proposal" aria-labelledby="proposal-title">
       <div class="shell">
         <div class="section-head section-head--tight">
@@ -146,7 +151,8 @@
       </div>
     </section>
 
-    <!-- CAPACIDADES -->
+    <!-- CAPACIDADES
+         Tarjetas más limpias; el detalle vive en un panel único. -->
     <section class="capabilities section" id="capabilities" aria-labelledby="capabilities-title">
       <div class="shell">
         <div class="section-head section-head--tight section-head--capabilities">
@@ -202,7 +208,8 @@
       </div>
     </section>
 
-    <!-- ESCALAMIENTO -->
+    <!-- ESCALAMIENTO
+         El panel activo incluye una gráfica simple de crecimiento iterativo / incremental. -->
     <section class="scaling section" id="scaling" aria-labelledby="scaling-title">
       <div class="shell">
         <div class="section-head section-head--tight">
@@ -245,12 +252,12 @@
             <div class="rollout-graphic" aria-hidden="true">
               <div class="rollout-graphic__label">Escalabilidad iterativa / incremental</div>
               <div class="rollout-graphic__bars">
-                <span></span>
+                <span class="is-active"></span>
                 <span></span>
                 <span></span>
                 <span></span>
               </div>
-              <div class="rollout-graphic__baseline"></div>
+              <div class="rollout-graphic__curve"></div>
             </div>
           </div>
 
@@ -265,7 +272,8 @@
       </div>
     </section>
 
-    <!-- CIERRE -->
+    <!-- CIERRE
+         Recupera la imagen del inicio para cerrar el arco narrativo. -->
     <section class="closing section" id="closing" aria-labelledby="closing-title">
       <div class="shell closing__layout">
         <div class="closing__statement">
@@ -285,32 +293,13 @@
             <div class="territory__zone territory__zone--a"></div>
             <div class="territory__zone territory__zone--b"></div>
             <div class="territory__zone territory__zone--c"></div>
-
-            <div class="signal-point signal-point--high signal-point--static" style="--x: 18%; --y: 70%;">
-              <span class="signal-point__rings"></span>
-              <span class="signal-point__core"></span>
-              <span class="signal-point__level signal-point__level--4"><i></i><i></i><i></i><i></i></span>
-            </div>
-            <div class="signal-point signal-point--mid signal-point--static" style="--x: 38%; --y: 52%;">
-              <span class="signal-point__rings"></span>
-              <span class="signal-point__core"></span>
-              <span class="signal-point__level signal-point__level--3"><i></i><i></i><i></i><i></i></span>
-            </div>
-            <div class="signal-point signal-point--mid signal-point--static" style="--x: 62%; --y: 35%;">
-              <span class="signal-point__rings"></span>
-              <span class="signal-point__core"></span>
-              <span class="signal-point__level signal-point__level--2"><i></i><i></i><i></i><i></i></span>
-            </div>
-            <div class="signal-point signal-point--high signal-point--static" style="--x: 80%; --y: 23%;">
-              <span class="signal-point__rings"></span>
-              <span class="signal-point__core"></span>
-              <span class="signal-point__level signal-point__level--4"><i></i><i></i><i></i><i></i></span>
-            </div>
-
-            <div class="signal-ghost signal-ghost--mid" style="--x: 58%; --y: 73%;"></div>
+            <div class="signal-ghost signal-ghost--mid" style="--x: 18%; --y: 70%;"></div>
+            <div class="signal-ghost signal-ghost--mid" style="--x: 38%; --y: 52%;"></div>
+            <div class="signal-ghost signal-ghost--mid" style="--x: 62%; --y: 35%;"></div>
+            <div class="signal-ghost signal-ghost--mid" style="--x: 80%; --y: 23%;"></div>
+            <div class="signal-ghost signal-ghost--low" style="--x: 58%; --y: 73%;"></div>
             <div class="signal-ghost signal-ghost--low" style="--x: 29%; --y: 28%;"></div>
-            <div class="signal-ghost signal-ghost--mid" style="--x: 73%; --y: 57%;"></div>
-            <div class="signal-ghost signal-ghost--low" style="--x: 10%; --y: 41%;"></div>
+            <div class="signal-ghost signal-ghost--low" style="--x: 73%; --y: 57%;"></div>
           </div>
         </div>
       </div>
