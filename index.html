@@ -3,23 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Propuesta comercial ejecutiva de One Mind para Ambipar: trazabilidad, lectura de uso y planificación de activos distribuidos." />
-  <title>One Mind × Ambipar — Propuesta de activos inteligentes</title>
+  <meta name="description" content="Propuesta comercial ejecutiva de One Mind para Ambipar: administración de activos sanitarios distribuidos mediante captura en terreno, backend con IA y gestión operacional." />
+  <title>One Mind × Ambipar — Activos sanitarios inteligentes</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <!-- Fondo global: textura mínima para sostener una estética premium sin parecer interfaz de software. -->
   <div class="site-bg" aria-hidden="true">
     <div class="site-bg__radial site-bg__radial--a"></div>
     <div class="site-bg__radial site-bg__radial--b"></div>
     <div class="site-bg__grid"></div>
   </div>
 
+  <!-- Navegación sticky hacia los cinco momentos narrativos de la propuesta. -->
   <header class="topbar" id="top">
     <div class="shell topbar__inner">
-      <a class="brand" href="#vision" aria-label="Ir al inicio">
+      <a class="brand" href="#vision" aria-label="Ir al inicio de la propuesta">
         <span class="brand__mark"></span>
         <span class="brand__text">One Mind <span>× Ambipar</span></span>
       </a>
@@ -32,37 +34,37 @@
         <a href="#closing">Cierre</a>
       </nav>
 
-      <a class="topbar__cta" href="#closing">Revisar implementación</a>
+      <div class="topbar__actions">
+        <a class="topbar__cta" href="#closing">Revisar implementación</a>
+        <a class="topbar__cta topbar__cta--accent" href="https://onemind.works/lab/ambipar" target="_blank" rel="noopener noreferrer">Dashboard</a>
+      </div>
     </div>
   </header>
 
   <main>
-    <!-- HERO
-         Imagen principal: activos distribuidos emitiendo señal y mostrando intensidad de uso.
-         El detalle ya no vive sobre la imagen; ahora se muestra bajo los chips de conceptos. -->
+    <!-- HERO / VISIÓN
+         Objetivo: instalar activos distribuidos + señal legible + lectura de uso.
+         Muy poco texto visible; la profundidad vive en una sola capa interactiva. -->
     <section class="hero section" id="vision" aria-labelledby="hero-title">
       <div class="shell hero__layout">
         <div class="hero__content">
           <p class="eyebrow">Propuesta comercial ejecutiva</p>
-          <h1 id="hero-title">Visibilidad en tiempo real para activos</h1>
+          <h1 id="hero-title">Visibilidad en tiempo real para activos sanitarios</h1>
           <p class="hero__lead">Una nueva capacidad para administrar mejor activos distribuidos.</p>
-          <p class="hero__support">Trazabilidad activa, lectura de uso y planificación sobre activos sanitarios en terreno.</p>
+          <p class="hero__support">Trazabilidad activa, lectura de uso y planificación de activos.</p>
 
+          <!-- Los cuatro focos quedan visibles; el detalle cambia el panel y la visual activa. -->
           <div class="hero-pills" role="tablist" aria-label="Dimensiones de lectura sobre activos">
             <button class="hero-pill is-active" data-signal="ubicacion" role="tab" aria-selected="true">Ubicación</button>
             <button class="hero-pill" data-signal="uso" role="tab" aria-selected="false">Uso</button>
             <button class="hero-pill" data-signal="movimiento" role="tab" aria-selected="false">Movimiento</button>
             <button class="hero-pill" data-signal="atencion" role="tab" aria-selected="false">Atención</button>
           </div>
-
-          <div class="hero-detail" aria-live="polite">
-            <span class="hero-detail__eyebrow" id="signal-eyebrow">Base instalada</span>
-            <h2 id="signal-title">Ubicación</h2>
-            <p id="signal-copy">Saber dónde está cada activo y recuperar control sobre la base instalada.</p>
-          </div>
         </div>
 
-        <div class="hero__visual" aria-label="Activos distribuidos emitiendo señal y nivel de uso">
+        <!-- Visual territorial abstracta: activos distribuidos emitiendo señales y distinto nivel de uso.
+             No debe leerse como dashboard ni mockup. -->
+        <div class="hero__visual" aria-label="Base instalada con señales legibles y distintos niveles de uso">
           <div class="territory">
             <div class="territory__grid"></div>
             <div class="territory__path territory__path--a"></div>
@@ -71,55 +73,59 @@
             <div class="territory__zone territory__zone--b"></div>
             <div class="territory__zone territory__zone--c"></div>
 
-            <!-- Activos principales: todos emiten señal y muestran nivel de uso. -->
+            <!-- Activos principales. Cada punto combina presencia, señal y nivel de uso. -->
             <button class="signal-point is-active signal-point--high" data-signal="ubicacion" style="--x: 18%; --y: 70%;" aria-label="Activo con foco en ubicación">
               <span class="signal-point__rings" aria-hidden="true"></span>
               <span class="signal-point__core" aria-hidden="true"></span>
-              <span class="signal-point__level signal-point__level--4" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+              <span class="signal-point__level" aria-hidden="true"><i></i><i></i><i></i></span>
             </button>
 
             <button class="signal-point signal-point--mid" data-signal="uso" style="--x: 38%; --y: 52%;" aria-label="Activo con foco en uso">
               <span class="signal-point__rings" aria-hidden="true"></span>
               <span class="signal-point__core" aria-hidden="true"></span>
-              <span class="signal-point__level signal-point__level--3" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+              <span class="signal-point__level" aria-hidden="true"><i></i><i></i><i></i></span>
             </button>
 
             <button class="signal-point signal-point--mid" data-signal="movimiento" style="--x: 62%; --y: 35%;" aria-label="Activo con foco en movimiento">
               <span class="signal-point__rings" aria-hidden="true"></span>
               <span class="signal-point__core" aria-hidden="true"></span>
-              <span class="signal-point__level signal-point__level--2" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+              <span class="signal-point__level" aria-hidden="true"><i></i><i></i><i></i></span>
             </button>
 
-            <button class="signal-point signal-point--high" data-signal="atencion" style="--x: 80%; --y: 23%;" aria-label="Activo con foco en atención priorizada">
+            <button class="signal-point signal-point--high" data-signal="atencion" style="--x: 80%; --y: 23%;" aria-label="Activo priorizado para atención">
               <span class="signal-point__rings" aria-hidden="true"></span>
               <span class="signal-point__core" aria-hidden="true"></span>
-              <span class="signal-point__level signal-point__level--4" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+              <span class="signal-point__level" aria-hidden="true"><i></i><i></i><i></i></span>
             </button>
 
             <!-- Activos secundarios para sugerir base instalada más amplia. -->
-            <div class="signal-ghost signal-ghost--mid" style="--x: 58%; --y: 73%;" aria-hidden="true"></div>
+            <div class="signal-ghost signal-ghost--low" style="--x: 58%; --y: 73%;" aria-hidden="true"></div>
             <div class="signal-ghost signal-ghost--low" style="--x: 29%; --y: 28%;" aria-hidden="true"></div>
             <div class="signal-ghost signal-ghost--mid" style="--x: 73%; --y: 57%;" aria-hidden="true"></div>
-            <div class="signal-ghost signal-ghost--low" style="--x: 10%; --y: 41%;" aria-hidden="true"></div>
+
+            <div class="hero-reveal" id="signal-panel" aria-live="polite">
+              <span class="hero-reveal__eyebrow">Activo priorizado</span>
+              <h2 id="signal-title">Ubicación</h2>
+              <p id="signal-copy">Saber dónde está cada activo y recuperar visibilidad sobre la base instalada.</p>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- PROPUESTA
-         Se simplifican las tarjetas. Solo quedan concepto central y una línea visible. -->
+         Mantener tesis y flujo. El detalle activo solo existe si agrega claridad útil. -->
     <section class="proposal section" id="proposal" aria-labelledby="proposal-title">
       <div class="shell">
         <div class="section-head section-head--tight">
           <div>
             <p class="eyebrow">Propuesta</p>
-            <h2 id="proposal-title">El siguiente salto en la digitalización de activos</h2>
+            <h2 id="proposal-title">El siguiente salto en la digitalización de activos sanitarios</h2>
           </div>
-          <p class="section-head__side section-head__side--small">Captura en terreno, IA aplicada y gestión operacional sobre activos sanitarios distribuidos.</p>
         </div>
 
         <div class="proposal-thesis">
-          <p>Convertir señales físicas en decisiones operacionales</p>
+          <p>Convertir señales físicas en decisiones sobre activos y operación</p>
         </div>
 
         <div class="flow" aria-label="Flujo de solución">
@@ -132,7 +138,7 @@
           <button class="flow-step flow-step--featured" data-flow="backend" aria-expanded="false">
             <span class="flow-step__index">02</span>
             <strong>Backend con IA</strong>
-            <span>Lectura inteligente</span>
+            <span>Lectura útil</span>
           </button>
           <div class="flow-line" aria-hidden="true"></div>
           <button class="flow-step" data-flow="operations" aria-expanded="false">
@@ -143,7 +149,7 @@
         </div>
 
         <div class="flow-detail" aria-live="polite">
-          <span class="flow-detail__eyebrow">Capa activa</span>
+          <span class="flow-detail__eyebrow">Lectura activa</span>
           <h3 id="flow-title">Captura en terreno</h3>
           <p id="flow-copy">Ubicación, movimiento y eventos físicos del activo para empezar a leer su estado.</p>
           <div class="flow-tags" id="flow-tags"></div>
@@ -152,7 +158,8 @@
     </section>
 
     <!-- CAPACIDADES
-         Tarjetas más limpias; el detalle vive en un panel único. -->
+         Trazabilidad activa y planificación de activos dominan.
+         El panel de detalle debe conectar capacidad con consecuencia real de negocio. -->
     <section class="capabilities section" id="capabilities" aria-labelledby="capabilities-title">
       <div class="shell">
         <div class="section-head section-head--tight section-head--capabilities">
@@ -160,148 +167,105 @@
             <p class="eyebrow">Capacidades</p>
             <h2 id="capabilities-title">Lo que esta capa vuelve posible sobre la base instalada</h2>
           </div>
-          <p class="section-head__side">Más control, mejor criterio y mejores decisiones sobre activos sanitarios.</p>
+          <p class="section-head__side">Más control, mejor criterio y mejores decisiones sobre activos.</p>
         </div>
 
         <div class="cap-grid" role="list" aria-label="Capacidades clave">
           <article class="cap-card cap-card--primary is-active" data-cap="traceability" role="listitem" tabindex="0">
             <span class="cap-card__badge">Prioridad</span>
             <h3>Trazabilidad activa</h3>
-            <p>Control de activos</p>
-            <span class="cap-card__hint">Localización y cambios relevantes</span>
+            <p>Saber dónde está cada activo y detectar cambios relevantes.</p>
+            <span class="cap-card__hint">Control de activos</span>
           </article>
 
           <article class="cap-card cap-card--primary" data-cap="planning" role="listitem" tabindex="0">
             <span class="cap-card__badge">Prioridad</span>
             <h3>Planificación de activos</h3>
-            <p>Disponibilidad y vida útil</p>
-            <span class="cap-card__hint">Rotación, revisión y mantenimiento</span>
+            <p>Decidir mejor revisión, rotación, disponibilidad y mantenimiento.</p>
+            <span class="cap-card__hint">Disponibilidad y vida útil</span>
           </article>
 
           <article class="cap-card" data-cap="usage" role="listitem" tabindex="0">
-            <span class="cap-card__badge">Complementaria</span>
+            <span class="cap-card__badge">Capacidad</span>
             <h3>Lectura de uso</h3>
-            <p>Frecuencia y criterio</p>
-            <span class="cap-card__hint">Uso real por activo y por zona</span>
+            <p>Entender comportamiento real por activo y por zona.</p>
+            <span class="cap-card__hint">Frecuencia y capacidad</span>
           </article>
 
           <article class="cap-card" data-cap="cleaning" role="listitem" tabindex="0">
-            <span class="cap-card__badge">Complementaria</span>
+            <span class="cap-card__badge">Capacidad</span>
             <h3>Limpieza proactiva</h3>
-            <p>Foco donde más importa</p>
-            <span class="cap-card__hint">Atención antes del deterioro</span>
+            <p>Atender antes de que el problema escale.</p>
+            <span class="cap-card__hint">Foco operacional</span>
           </article>
         </div>
 
-        <div class="cap-panel" aria-live="polite">
-          <div class="cap-panel__content">
-            <span class="cap-panel__eyebrow">Consecuencia operativa</span>
+        <div class="cap-detail" aria-live="polite">
+          <div>
+            <span class="cap-detail__eyebrow">Consecuencia operativa</span>
             <h3 id="cap-title">Trazabilidad activa</h3>
-            <p id="cap-copy">Reduce tiempo perdido buscando activos, recupera control sobre la base instalada y mejora la conversación con el cliente.</p>
+            <p id="cap-copy">Reduce tiempo perdido buscando activos, recupera visibilidad sobre la base instalada y mejora la conversación con el cliente.</p>
           </div>
-          <div class="cap-panel__impacts">
-            <span id="cap-impact-1">− Costos</span>
-            <span id="cap-impact-2">+ Clientes</span>
-            <span id="cap-impact-3">+ Foco</span>
+          <div class="cap-detail__meta">
+            <span id="cap-impact-1">Costos</span>
+            <span id="cap-impact-2">Clientes</span>
+            <span id="cap-impact-3">Foco</span>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ESCALAMIENTO
-         El panel activo incluye una gráfica simple de crecimiento iterativo / incremental. -->
+    <!-- IMPLEMENTACIÓN Y ESCALAMIENTO
+         Solo se mantiene interacción donde realmente cambia el porqué del rollout. -->
     <section class="scaling section" id="scaling" aria-labelledby="scaling-title">
-      <div class="shell">
-        <div class="section-head section-head--tight">
-          <div>
-            <p class="eyebrow">Implementación y escalamiento</p>
-            <h2 id="scaling-title">Empezar acotado. Aprender rápido. Escalar por zonas.</h2>
+      <div class="shell scaling__layout">
+        <div class="scaling__content">
+          <p class="eyebrow">Implementación y escalamiento</p>
+          <h2 id="scaling-title">Empezar acotado. Aprender rápido. Escalar por zonas.</h2>
+          <p class="scaling__lead">Una implementación iterativa para construir capacidad real sobre activos y mejorar precisión en cada etapa.</p>
+
+          <div class="rollout-steps" role="tablist" aria-label="Etapas de implementación">
+            <button class="rollout-step is-active" data-step="1" role="tab" aria-selected="true">
+              <span>01</span>
+              <strong>Piloto inicial</strong>
+            </button>
+            <button class="rollout-step" data-step="2" role="tab" aria-selected="false">
+              <span>02</span>
+              <strong>Aprendizaje operativo</strong>
+            </button>
+            <button class="rollout-step" data-step="3" role="tab" aria-selected="false">
+              <span>03</span>
+              <strong>Zona implementada</strong>
+            </button>
+            <button class="rollout-step" data-step="4" role="tab" aria-selected="false">
+              <span>04</span>
+              <strong>Escalamiento por zonas</strong>
+            </button>
           </div>
-          <p class="section-head__side">Un despliegue iterativo para reducir riesgo, acelerar aprendizaje y construir capacidad real.</p>
         </div>
 
-        <div class="rollout-nav" role="tablist" aria-label="Etapas del despliegue">
-          <button class="rollout-step is-active" data-step="1" aria-selected="true">
-            <span class="rollout-step__number">01</span>
-            <strong>Piloto inicial</strong>
-            <span>Validación controlada</span>
-          </button>
-          <button class="rollout-step" data-step="2" aria-selected="false">
-            <span class="rollout-step__number">02</span>
-            <strong>Aprendizaje operativo</strong>
-            <span>Calibración y ajuste</span>
-          </button>
-          <button class="rollout-step" data-step="3" aria-selected="false">
-            <span class="rollout-step__number">03</span>
-            <strong>Zona implementada</strong>
-            <span>Capacidad visible</span>
-          </button>
-          <button class="rollout-step" data-step="4" aria-selected="false">
-            <span class="rollout-step__number">04</span>
-            <strong>Escalamiento por zonas</strong>
-            <span>Replicación incremental</span>
-          </button>
-        </div>
-
-        <div class="rollout-panel" id="rollout-panel" aria-live="polite">
-          <div class="rollout-panel__content">
-            <span class="rollout-panel__label">Etapa activa</span>
-            <h3 id="rollout-title">Piloto inicial</h3>
-            <p id="rollout-copy">Validar trazabilidad, lectura de uso y reglas de atención en una zona controlada antes de ampliar despliegue.</p>
-
-            <div class="rollout-graphic" aria-hidden="true">
-              <div class="rollout-graphic__label">Escalabilidad iterativa / incremental</div>
-              <div class="rollout-graphic__bars">
-                <span class="is-active"></span>
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
-              <div class="rollout-graphic__curve"></div>
-            </div>
-          </div>
-
+        <aside class="rollout-detail" aria-live="polite">
+          <span class="rollout-detail__eyebrow">Etapa activa</span>
+          <h3 id="rollout-title">Piloto inicial</h3>
+          <p id="rollout-copy">Validar trazabilidad activa, lectura de uso y reglas de atención en una zona controlada.</p>
           <div class="rollout-benefits">
             <span>Menor riesgo inicial</span>
-            <span>Aprendizaje rápido en contexto real</span>
-            <span>Expansión controlada y acumulativa</span>
+            <span>Aprendizaje en contexto real</span>
+            <span>Escalamiento acumulativo</span>
           </div>
-        </div>
-
-        <p class="rollout-closure">Cada zona implementada mejora la siguiente.</p>
+        </aside>
       </div>
     </section>
 
     <!-- CIERRE
-         Recupera la imagen del inicio para cerrar el arco narrativo. -->
+         Mantenerlo como statement institucional, recuperando el lenguaje de activos. -->
     <section class="closing section" id="closing" aria-labelledby="closing-title">
       <div class="shell closing__layout">
-        <div class="closing__statement">
-          <p class="eyebrow">Cierre</p>
-          <h2 id="closing-title">El primer paso en el camino de activos inteligentes</h2>
-          <p class="closing__lead">Una nueva capacidad para administrar activos sanitarios con trazabilidad activa, lectura de uso y planificación de activos.</p>
-          <p class="closing__body">No estamos proponiendo solo monitoreo ni solo tecnología. Estamos proponiendo una forma distinta de administrar activos distribuidos y convertir señales físicas en decisiones operacionales.</p>
-          <div class="closing__emphasis">Una nueva capacidad para Ambipar</div>
-          <a class="closing__cta" href="#proposal">Revisar propuesta de implementación</a>
-        </div>
-
-        <div class="closing__visual" aria-hidden="true">
-          <div class="territory territory--closing">
-            <div class="territory__grid"></div>
-            <div class="territory__path territory__path--a"></div>
-            <div class="territory__path territory__path--b"></div>
-            <div class="territory__zone territory__zone--a"></div>
-            <div class="territory__zone territory__zone--b"></div>
-            <div class="territory__zone territory__zone--c"></div>
-            <div class="signal-ghost signal-ghost--mid" style="--x: 18%; --y: 70%;"></div>
-            <div class="signal-ghost signal-ghost--mid" style="--x: 38%; --y: 52%;"></div>
-            <div class="signal-ghost signal-ghost--mid" style="--x: 62%; --y: 35%;"></div>
-            <div class="signal-ghost signal-ghost--mid" style="--x: 80%; --y: 23%;"></div>
-            <div class="signal-ghost signal-ghost--low" style="--x: 58%; --y: 73%;"></div>
-            <div class="signal-ghost signal-ghost--low" style="--x: 29%; --y: 28%;"></div>
-            <div class="signal-ghost signal-ghost--low" style="--x: 73%; --y: 57%;"></div>
-          </div>
-        </div>
+        <p class="eyebrow">Cierre</p>
+        <h2 id="closing-title">El primer paso en el camino de activos inteligentes</h2>
+        <p class="closing__lead">Una nueva capacidad para Ambipar: trazabilidad activa, lectura de uso y planificación de activos sobre la base instalada.</p>
+        <p class="closing__statement">No es solo monitoreo. Es una nueva forma de administrar mejor activos distribuidos.</p>
+        <a class="closing__cta" href="#top">Revisar propuesta de implementación</a>
       </div>
     </section>
   </main>
