@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sanitarios Smart — Deck Ejecutivo</title>
+  <style>
+    :root{
+      --bg:#f3f7fb;
+      --bg2:#edf3f9;
+      --panel:#ffffff;
+      --panel-soft:#f8fbfe;
+      --ink:#122134;
+      --muted:#617185;
+      --line:#d7e2ee;
+      --teal:#59ddc6;
+      --teal-dark:#117967;
+      --blue:#79a6ff;
+      --blue-dark:#355fbc;
+      --gold:#f4cb74;
+      --red:#ff8c8c;
+      --red-dark:#d95d5d;
+      --green:#53cf8b;
+      --purple:#b194ff;
+      --shadow:0 22px 70px rgba(18,33,52,.10);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#eef4fa;color:var(--ink);overflow:hidden}
+    body::before{content:"";position:fixed;inset:0;z-index:-2;background:
+      radial-gradient(900px 520px at 0% -10%, rgba(89,221,198,.08), transparent 55%),
+      radial-gradient(900px 580px at 100% 0%, rgba(121,166,255,.10), transparent 56%),
+      linear-gradient(180deg,#f7fbff 0%, #eef4fa 100%)}
+
+```
+.deck{height:100vh;width:100vw;position:relative;overflow:hidden}
+.slides{height:100%;display:flex;transition:transform .72s cubic-bezier(.77,0,.18,1)}
+.slide{min-width:100vw;height:100vh;display:flex;align-items:center;justify-content:center;padding:30px}
+.canvas{width:min(calc(100vw - 48px), 1600px);aspect-ratio:16/9;position:relative;overflow:hidden;border-radius:34px;box-shadow:var(--shadow);border:1px solid rgba(18,33,52,.08);background:linear-gradient(180deg,var(--bg),var(--bg2))}
+.canvas::before,.canvas::after{content:"";position:absolute;border-radius:999px;filter:blur(6px)}
+.canvas::before{width:360px;height:360px;right:-120px;top:-120px;background:radial-gradient(circle, rgba(121,166,255,.12), transparent 65%)}
+.canvas::after{width:420px;height:420px;left:-180px;bottom:-190px;background:radial-gradient(circle, rgba(89,221,198,.08), transparent 65%)}
+.inner{position:relative;z-index:2;padding:44px 50px 30px;height:100%;display:flex;flex-direction:column}
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:12px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--teal-dark)}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--teal);box-shadow:0 0 18px rgba(89,221,198,.45)}
+.number{font-size:14px;font-weight:800;letter-spacing:.18em;color:rgba(18,33,52,.32)}
+.title{font-size:56px;line-height:.98;letter-spacing:-.05em;font-weight:860;max-width:1220px;margin-top:14px}
+.subtitle{margin-top:14px;font-size:20px;line-height:1.35;color:var(--muted);max-width:930px}
+.grow{flex:1}
+.footer{margin-top:auto;display:flex;justify-content:space-between;align-items:center;padding-top:14px;font-size:12px;color:rgba(18,33,52,.40)}
+.brand{font-weight:900;letter-spacing:.16em;text-transform:uppercase}
+
+.card{background:var(--panel);border:1px solid var(--line);border-radius:28px;padding:20px;box-shadow:0 8px 24px rgba(18,33,52,.04)}
+.mini{font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.h2{font-size:30px;line-height:1.03;letter-spacing:-.04em;font-weight:820;margin-top:8px}
+.body{font-size:15px;line-height:1.42;color:var(--muted);margin-top:10px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.list{display:flex;flex-direction:column;gap:10px;margin-top:14px}
+.item{display:flex;gap:10px;align-items:flex-start;font-size:15px;line-height:1.34;color:inherit}
+.bullet{width:19px;height:19px;border-radius:7px;display:grid;place-items:center;flex:0 0 auto;font-size:12px;font-weight:900;margin-top:1px;background:rgba(89,221,198,.14);color:var(--teal-dark)}
+.signal{display:flex;gap:14px;align-items:flex-start}
+.signal .bar{width:4px;min-height:86px;border-radius:999px;background:linear-gradient(180deg,var(--teal-dark),transparent)}
+.signal .txt{font-size:28px;line-height:1.14;letter-spacing:-.04em;font-weight:840}
+.signal .txt span{display:block;margin-top:10px;font-size:15px;line-height:1.38;font-weight:640;color:var(--muted);letter-spacing:0}
+.tag-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.tag{padding:9px 13px;border-radius:999px;background:#fff;border:1px solid var(--line);font-size:12px;font-weight:700}
+
+.hero-clean{display:flex;align-items:center;justify-content:center;text-align:center;height:100%}
+.hero-clean h1{font-size:78px;line-height:.9;letter-spacing:-.068em;font-weight:880;max-width:1200px;margin:0}
+.hero-clean p{margin:24px auto 0;font-size:20px;line-height:1.35;color:var(--muted);max-width:760px}
+
+.problem-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:22px}
+.problem{padding:14px 14px 14px;border-radius:22px;border:1px solid var(--line);background:var(--panel);min-height:138px;display:flex;flex-direction:column}
+.problem .num{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:800}
+.problem .t{font-size:19px;line-height:1.06;font-weight:820;letter-spacing:-.03em;margin-top:10px}
+.problem .d{font-size:14px;line-height:1.34;color:var(--muted);margin-top:10px}
+.problem svg{width:100%;height:50px;margin-top:auto}
+
+.diagnosis-layout{display:grid;grid-template-columns:.96fr 1.04fr;gap:18px;margin-top:18px;align-items:stretch}
+.usage-card{border:1px solid var(--line);border-radius:28px;background:var(--panel);padding:18px;display:flex;flex-direction:column}
+.usage-card svg{width:100%;height:100%}
+.right-stack{display:grid;grid-template-rows:auto 1fr auto;gap:14px}
+.risk-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.risk{padding:16px;border-radius:22px;background:var(--panel);border:1px solid var(--line)}
+.risk .t{font-size:18px;line-height:1.08;font-weight:820;letter-spacing:-.03em}
+.risk .d{font-size:14px;line-height:1.34;color:var(--muted);margin-top:8px}
+.quote-box{padding:16px 18px;border-radius:20px;background:linear-gradient(180deg, rgba(89,221,198,.08), rgba(121,166,255,.04));border:1px solid rgba(89,221,198,.20)}
+.quote-box .q{font-size:20px;line-height:1.2;font-weight:840;letter-spacing:-.03em}
+.quote-box .s{font-size:14px;line-height:1.36;color:var(--muted);margin-top:10px}
+
+.compare-layout{display:grid;grid-template-columns:1fr 78px 1fr;gap:14px;margin-top:22px}
+.compare{padding:16px;border-radius:24px;border:1px solid var(--line);background:var(--panel);min-height:unset}
+.arrow-col{display:grid;place-items:center}.arrow-pill{width:60px;height:60px;border-radius:999px;display:grid;place-items:center;font-size:28px;color:var(--teal-dark);background:#fff;border:1px solid var(--line)}
+
+.engine-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;margin-top:18px}
+.engine{padding:18px;border-radius:26px;border:1px solid var(--line);background:var(--panel);min-height:190px;display:flex;flex-direction:column;justify-content:space-between}
+.engine-icon{width:54px;height:54px;border-radius:16px;display:grid;place-items:center;background:linear-gradient(135deg, rgba(89,221,198,.16), rgba(121,166,255,.10));border:1px solid rgba(18,33,52,.08)}
+
+.waterfall{display:grid;grid-template-columns:240px 1fr 240px;gap:18px;align-items:center;margin-top:18px}
+.sidebox{padding:22px;border-radius:26px;background:var(--panel);border:1px solid var(--line)}
+.sidebox .big{font-size:54px;line-height:.95;font-weight:860;letter-spacing:-.06em;margin-top:10px}
+.wf-main{padding:18px;border-radius:28px;border:1px solid var(--line);background:var(--panel)}
+.wf-steps{display:grid;gap:12px;margin-top:10px}
+.wf-step{display:grid;grid-template-columns:1.2fr .42fr;gap:12px;align-items:center;padding:15px 18px;border-radius:20px;background:var(--panel-soft);border:1px solid var(--line)}
+.wf-step .name{font-size:20px;font-weight:830;letter-spacing:-.03em}
+.wf-step .desc{font-size:13px;line-height:1.34;color:var(--muted);margin-top:6px}
+.wf-step .value{font-size:34px;font-weight:860;line-height:1;text-align:right}
+.wf-step.plus .value{color:var(--green)}
+.wf-step.minus .value{color:var(--red-dark)}
+.connector{height:14px;margin-left:26px;border-left:2px solid rgba(121,166,255,.34)}
+
+.scenario-layout{display:grid;grid-template-columns:1fr;gap:18px;margin-top:18px}
+.scenario-viz{padding:22px;border-radius:26px;border:1px solid var(--line);background:var(--panel)}
+.scenario-bars{display:flex;align-items:flex-end;justify-content:space-between;height:220px;padding:0 16px 6px}
+.sg{display:flex;flex-direction:column;align-items:center;gap:10px;flex:1}.barstack{height:180px;display:flex;align-items:flex-end;gap:10px}
+.bar-a,.bar-b{width:36px;border-radius:16px 16px 0 0}.bar-a{height:46%;background:linear-gradient(180deg,var(--blue),rgba(121,166,255,.3))}.bar-b{background:linear-gradient(180deg,var(--teal),rgba(89,221,198,.3))}.bar-b.b1{height:58%}.bar-b.b2{height:82%}.bar-b.b3{height:100%;background:linear-gradient(180deg,var(--gold),rgba(244,203,116,.34))}
+.sg .lab{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:800;text-align:center}.sg .lab strong{display:block;margin-top:6px;font-size:22px;letter-spacing:-.03em;text-transform:none;color:inherit}
+
+.opportunity{display:grid;grid-template-columns:1.04fr .96fr;gap:18px;margin-top:18px}
+.opp-graph{padding:18px;border-radius:28px;border:1px solid var(--line);background:var(--panel)}
+.opp-impact{padding:24px;border-radius:28px;border:1px solid rgba(89,221,198,.22);background:linear-gradient(180deg, rgba(89,221,198,.09), rgba(121,166,255,.05));display:flex;flex-direction:column;justify-content:center}
+.opp-impact .num{font-size:56px;line-height:.95;font-weight:860;letter-spacing:-.06em;margin-top:10px}
+.opp-impact .num.small{font-size:48px}
+
+.offers{display:grid;grid-template-columns:1fr 1.15fr 1fr;gap:18px;margin-top:18px}
+.offer{padding:16px;border-radius:26px;border:1px solid var(--line);background:var(--panel);min-height:unset}
+.offer.featured{background:linear-gradient(180deg, rgba(89,221,198,.10), rgba(121,166,255,.06));border-color:rgba(89,221,198,.22)}
+.offer .name{font-size:28px;line-height:1;letter-spacing:-.04em;font-weight:850;margin-top:10px}
+.offer .one{font-size:15px;line-height:1.36;color:var(--muted);margin-top:10px}
+
+.bridge{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}.big-num{font-size:72px;line-height:.95;letter-spacing:-.06em;font-weight:860;margin-top:16px}
+
+.phases{display:grid;grid-template-columns:1fr 86px 1fr 86px 1fr 86px 1fr;gap:8px;align-items:center;margin-top:18px}
+.phase{padding:16px;border-radius:24px;border:1px solid var(--line);background:var(--panel);min-height:185px;display:flex;flex-direction:column}.phase .n{width:34px;height:34px;border-radius:999px;display:grid;place-items:center;background:rgba(89,221,198,.14);color:var(--teal-dark);font-size:13px;font-weight:900}.phase .t{font-size:24px;letter-spacing:-.03em;font-weight:820;margin-top:14px}.phase .time{margin-top:8px;font-size:12px;text-transform:uppercase;letter-spacing:.18em;color:var(--muted);font-weight:800}
+.phase-arrow{display:grid;place-items:center}.phase-arrow div{width:60px;height:60px;border-radius:999px;display:grid;place-items:center;background:#fff;border:1px solid var(--line);color:var(--teal-dark);font-size:28px;font-weight:900}
+
+.investment{display:grid;grid-template-columns:1.05fr .95fr;gap:18px;margin-top:18px}
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
+.tier{padding:18px;border-radius:22px;border:1px solid var(--line);background:var(--panel)}
+.tier .step{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:800}
+.tier .q{font-size:34px;line-height:1;font-weight:860;letter-spacing:-.05em;margin-top:8px}
+.calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+.calc{padding:16px;border-radius:20px;border:1px solid var(--line);background:var(--panel-soft)}
+.calc .k{font-size:12px;text-transform:uppercase;letter-spacing:.16em;color:var(--muted);font-weight:800}
+.calc .v{font-size:28px;line-height:1;font-weight:860;letter-spacing:-.04em;margin-top:8px}
+.calc .v.green{color:var(--green)}
+.free-box{padding:20px;border-radius:24px;border:1px solid rgba(89,221,198,.22);background:linear-gradient(180deg, rgba(89,221,198,.10), rgba(121,166,255,.05))}
+
+.decision{display:grid;grid-template-columns:1fr .95fr;gap:18px;margin-top:18px}.metrics-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.decision-card{padding:22px;border-radius:26px;border:1px solid var(--line);background:var(--panel)}
+.decision-card .v{font-size:46px;line-height:1;font-weight:860;letter-spacing:-.05em;margin-top:10px}
+.cta{padding:24px;border-radius:28px;border:1px solid rgba(89,221,198,.22);background:linear-gradient(180deg, rgba(89,221,198,.10), rgba(121,166,255,.05))}.cta .bigline{font-size:34px;line-height:1.08;letter-spacing:-.04em;font-weight:860;margin-top:8px}
+
+.nav{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:100;display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:999px;background:rgba(18,33,52,.78);backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.08);box-shadow:0 12px 40px rgba(0,0,0,.18)}
+.nav button{width:44px;height:44px;border:none;border-radius:999px;background:rgba(255,255,255,.08);color:#fff;cursor:pointer;font-size:18px;font-weight:800;transition:.2s ease}.nav button:hover{background:rgba(255,255,255,.16);transform:translateY(-1px)}
+.dots{display:flex;gap:8px;padding:0 8px}.dotnav{width:9px;height:9px;border-radius:999px;background:rgba(255,255,255,.28);transition:.25s ease}.dotnav.active{width:26px;background:var(--teal)}
+.counter{font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.70);padding:0 8px}
+.top-nav{position:fixed;right:16px;top:16px;z-index:100;display:flex;gap:10px}.top-nav button{border:none;border-radius:14px;padding:12px 14px;background:rgba(18,33,52,.82);color:#fff;font-weight:800;letter-spacing:.08em;cursor:pointer;border:1px solid rgba(255,255,255,.08);backdrop-filter:blur(18px)}
+
+@media print{html,body{overflow:visible;background:white}.deck{height:auto;overflow:visible}.slides{display:block;height:auto;transform:none!important}.slide{height:auto;page-break-after:always;padding:0}.canvas{width:100vw;height:56.25vw;border-radius:0;box-shadow:none;border:none}.nav,.top-nav{display:none!important}}
+```
+
+  </style>
+</head>
+<body>
+  <div class="deck" id="deck">
+    <div class="slides" id="slides">
+
+```
+  <section class="slide"><div class="canvas"><div class="inner"><div class="hero-clean grow"><div><h1>De un negocio commodity a un modelo inteligente de servicios sanitarios</h1><p>La oportunidad no está en limpiar mejor. Está en dejar de competir como commodity.</p></div></div><div class="footer"><div class="brand">AMBIPAR × ONE MIND</div><div>Presentación ejecutiva · Abril 2026</div></div></div></div></section>
+
+  <section class="slide"><div class="canvas"><div class="inner"><div class="top"><div><div class="eyebrow"><span class="dot"></span> Problema estructural</div><div class="title">El negocio sanitario está estructurado para competir por precio</div><div class="subtitle">Una sola oferta, frecuencia fija y pricing plano para realidades operativas completamente distintas.</div></div><div class="number">02</div></div><div class="grow problem-grid"><div class="problem"><div class="num">01</div><div class="t">Una sola oferta</div><div class="d">La propuesta comercial no distingue intensidad de uso, criticidad ni perfil del cliente.</div><svg viewBox="0 0 100 40"><rect x="12" y="16" width="16" height="10" rx="4" fill="#79a6ff"/><rect x="34" y="16" width="16" height="10" rx="4" fill="#79a6ff"/><rect x="56" y="16" width="16" height="10" rx="4" fill="#79a6ff"/></svg></div><div class="problem"><div class="num">02</div><div class="t">Frecuencia fija</div><div class="d">Se limpia por calendario, no por necesidad real. El error puede ir en ambos sentidos.</div><svg viewBox="0 0 100 40"><path d="M8 28 C28 6,48 28,68 14 C78 8,86 10,94 18" stroke="#59ddc6" stroke-width="3" fill="none"/></svg></div><div class="problem"><div class="num">03</div><div class="t">Pricing plano</div><div class="d">Clientes de bajo uso subsidian clientes de alto uso sin que el negocio lo vea.</div><svg viewBox="0 0 100 40"><rect x="14" y="14" width="14" height="16" rx="4" fill="#f4cb74"/><rect x="38" y="10" width="14" height="20" rx="4" fill="#f4cb74"/><rect x="62" y="6" width="14" height="24" rx="4" fill="#f4cb74"/></svg></div><div class="problem"><div class="num">04</div><div class="t">Operación a ciegas</div><div class="d">No hay señal real sobre uso, criticidad ni necesidad de intervención.</div><svg viewBox="0 0 100 40"><circle cx="22" cy="20" r="8" fill="#b194ff"/><circle cx="50" cy="20" r="8" fill="#b194ff" opacity=".55"/><circle cx="78" cy="20" r="8" fill="#b194ff" opacity=".28"/></svg></div><div class="problem" style="background:linear-gradient(180deg, rgba(255,140,140,.08), rgba(244,203,116,.05));border-color:rgba(255,140,140,.16)"><div class="num">05</div><div class="t">Resultado: commodity</div><div class="d">Cuando no puedes diferenciar servicio, la conversación se empuja al precio.</div><svg viewBox="0 0 100 40"><path d="M8 28 L92 10" stroke="#ff8c8c" stroke-width="3"/><circle cx="8" cy="28" r="4" fill="#ff8c8c"/><circle cx="92" cy="10" r="4" fill="#ff8c8c"/></svg></div></div><div class="footer"><div class="brand">02 · COMMODITY</div><div>Cuando no puedes diferenciar servicio, solo puedes bajar precio</div></div></div></div></section>
+
+  <section class="slide"><div class="canvas"><div class="inner"><div class="top"><div><div class="eyebrow"><span class="dot"></span> Costo invisible</div><div class="title">El costo invisible de operar a ciegas</div><div class="subtitle">Lo que hoy parece normal es, en realidad, una mezcla silenciosa de margen perdido, riesgo de servicio y subsidio cruzado.</div></div><div class="number">03</div></div><div class="grow diagnosis-layout"><div class="usage-card"><div class="mini">Niveles de uso vs precio uniforme</div><svg viewBox="0 0 760 460" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="u1b" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#59ddc6"/><stop offset="100%" stop-color="#d2f7f0"/></linearGradient><linearGradient id="u2b" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#79a6ff"/><stop offset="100%" stop-color="#d4e1ff"/></linearGradient><linearGradient id="u3b" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ff8c8c"/><stop offset="100%" stop-color="#ffd4d4"/></linearGradient></defs><rect x="0" y="0" width="760" height="460" fill="transparent"/><g opacity=".16"><path d="M90 90 H690 M90 170 H690 M90 250 H690 M90 330 H690" stroke="#122134"/><path d="M150 50 V380 M340 50 V380 M530 50 V380" stroke="#122134"/></g><text x="108" y="76" fill="#617185" font-size="12" font-family="Inter" font-weight="800" letter-spacing="2">PRECIO / MARGEN IMPLÍCITO</text><text x="295" y="422" fill="#617185" font-size="12" font-family="Inter" font-weight="800" letter-spacing="2">NIVEL DE USO</text><text x="124" y="404" fill="#122134" font-size="16" font-family="Inter" font-weight="800">Bajo</text><text x="314" y="404" fill="#122134" font-size="16" font-family="Inter" font-weight="800">Medio</text><text x="506" y="404" fill="#122134" font-size="16" font-family="Inter" font-weight="800">Alto</text><line x1="110" y1="220" x2="640" y2="220" stroke="#355fbc" stroke-width="3" stroke-dasharray="8 8"/><text x="470" y="205" fill="#355fbc" font-size="12" font-family="Inter" font-weight="800" letter-spacing="2">MISMO PRECIO</text><rect x="115" y="124" width="70" height="96" rx="18" fill="url(#u1b)"/><rect x="305" y="160" width="70" height="60" rx="18" fill="url(#u2b)"/><rect x="495" y="220" width="70" height="112" rx="18" fill="url(#u3b)"/><text x="104" y="244" fill="#117967" font-size="13" font-family="Inter" font-weight="800">sobreatendido</text><text x="300" y="244" fill="#355fbc" font-size="13" font-family="Inter" font-weight="800">casi equilibrio</text><text x="486" y="354" fill="#d95d5d" font-size="13" font-family="Inter" font-weight="800">subatendido</text><rect x="92" y="26" rx="18" width="272" height="76" fill="#ffffff" stroke="#d7e2ee"/><text x="114" y="54" fill="#617185" font-size="12" font-family="Inter" font-weight="800" letter-spacing="2">MISMO PRECIO, USOS DISTINTOS</text><text x="114" y="84" fill="#122134" font-size="24" font-family="Inter" font-weight="860">El margen se distorsiona</text></svg></div><div class="right-stack"><div class="risk-grid"><div class="risk"><div class="t">Se limpia un baño limpio</div><div class="d">Margen perdido en servicios que no agregan valor.</div></div><div class="risk"><div class="t">Se llega tarde a uno crítico</div><div class="d">Riesgo cliente, reclamo y deterioro de servicio.</div></div><div class="risk"><div class="t">Se cobra igual por clientes distintos</div><div class="d">Subsidio cruzado invisible entre realidades operativas desiguales.</div></div><div class="risk"><div class="t">No existe señal real de uso</div><div class="d">Dónde intervenir, cuándo intervenir y cuánto cobrar sigue siendo una apuesta.</div></div></div><div></div><div class="quote-box"><div class="q">“Si el baño se ocupa poco, yo voy igual. Si se ocupa mucho, yo voy igual.”</div><div class="s">Operar a ciegas parece normal hasta que empiezas a medirlo.</div></div></div></div><div class="footer"><div class="brand">03 · BLIND COST</div><div>Lo que hoy parece normal, en realidad destruye margen</div></div></div></div></section>
+
+  <section class="slide"><div class="canvas"><div class="inner"><div class="top"><div><div class="eyebrow"><span class="dot"></span> Cambio de modelo</div><div class="title">El problema no es limpieza. Es falta de información para decidir.</div><div class="subtitle">Cuando cambia la calidad de la información, cambia la economía de la operación.</div></div><div class="number">04</div></div><div class="grow compare-layout"><div class="compare"><div class="mini">Modelo actual</div><div class="h2">Estandarización rígida</div><div class="list"><div class="item"><span class="bullet">•</span><span>Frecuencia fija</span></div><div class="item"><span class="bullet">•</span><span>Precio promedio</span></div><div class="item"><span class="bullet">•</span><span>Calendario + intuición</span></div><div class="item"><span class="bullet">•</span><span>Una sola oferta</span></div></div></div><div class="arrow-col"><div class="arrow-pill">→</div></div><div class="compare" style="background:linear-gradient(180deg, rgba(89,221,198,.10), rgba(121,166,255,.06));border-color:rgba(89,221,198,.22)"><div class="mini">Modelo Smart</div><div class="h2">Servicio inteligente</div><div class="list"><div class="item"><span class="bullet">✓</span><span>Frecuencia adaptativa</span></div><div class="item"><span class="bullet">✓</span><span>Pricing inteligente</span></div><div class="item"><span class="bullet">✓</span><span>Mantenimiento predictivo</span></div><div class="item"><span class="bullet">✓</span><span>Portafolio segmentado</span></div></div></div></div><div class="footer"><div class="brand">04 · MODEL SHIFT</div><div>Información correcta = margen correcto</div></div></div></div></section>
+
+  <section class="slide"><div class="canvas"><div class="inner"><div class="top"><div><div class="eyebrow"><span class="dot"></span> Captura de valor</div><div class="title">El valor se construye por eficiencia, capacidad liberada y nueva oferta</div><div class="subtitle">Eficiencia y capacidad no son beneficios separados. Son una misma cadena causal.</div></div><div class="number">05</div></div><div class="grow engine-grid"><div class="engine"><div><div class="engine-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M4 17l5-5 3 3 8-8" stroke="#59ddc6" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="h2">Eficiencia + capacidad liberada</div><div class="body">Menos visitas innecesarias, menos kilómetros malos y más capacidad útil para atender mejor con la misma base operacional.</div></div><svg viewBox="0 0 320 120" style="width:100%;height:120px;margin-top:12px" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="flow1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#59ddc6"/><stop offset="100%" stop-color="#79a6ff"/></linearGradient></defs><rect x="10" y="54" rx="18" width="82" height="28" fill="url(#flow1)"/><rect x="102" y="42" rx="18" width="90" height="40" fill="url(#flow1)" opacity=".88"/><rect x="202" y="26" rx="18" width="104" height="56" fill="url(#flow1)" opacity=".8"/><text x="12" y="104" fill="#617185" font-size="11" font-family="Inter" font-weight="800" letter-spacing="1.6">MENOS COSTO → MÁS CAPACIDAD → MÁS PRODUCTIVIDAD</text></svg></div><div class="engine"><div><div class="engine-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M12 3v18M6 8.5C6 6.6 7.8 5 10.2 5H14c2.2 0 4 1.4 4 3.3 0 4.4-12 1.1-12 5.4C6 15.7 7.8 17 10 17h4c2.2 0 4-1.5 4-3.3" stroke="#f4cb74" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="h2">Nueva oferta comercial</div><div class="body">Estándar Inteligente, Mantenimiento Predictivo y Tarifa Flexible permiten capturar valor distinto según el cliente.</div></div><div class="tag-row"><div class="tag">estándar inteligente</div><div class="tag">mantenimiento predictivo</div><div class="tag">tarifa flexible</div></div></div><div class="engine"><div><div class="engine-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M12 2l3.2 6.5 7.1 1-5.1 5 1.2 7.1L12 18.2 5.6 21.6l1.2-7.1-5.1-5 7.1-1L12 2z" stroke="#b194ff" stroke-width="1.8" fill="rgba(177,148,255,.18)"/></svg></div><div class="h2">Impacto estratégico</div><div class="body">Más EBITDA, menor churn, diferenciación real y salida progresiva de la lógica commodity.</div></div><div class="tag-row"><div class="tag">margen</div><div class="tag">diferenciación</div><div class="tag">crecimiento</div></div></div></div><div class="footer"><div class="brand">05 · VALUE LOGIC</div><div>No vamos a hacer más servicios. Vamos a capturar mejor valor.</div></div></div></div></section>
+
+  <section class="slide"><div class="canvas"><div class="inner"><div class="top"><div><div class="eyebrow"><span class="dot"></span> EBITDA</div><div class="title">El EBITDA no mejora por optimismo. Mejora por estructura.</div><div class="subtitle">Una cadena clara de palancas: dónde se expande margen y por qué cambia la estructura del negocio.</div></div><div class="number">06</div></div><div class="grow waterfall"><div class="sidebox"><div class="mini">Punto de partida</div><div class="h2">EBITDA actual mensual</div><div class="big">$314 MM</div><div class="body">Margen EBITDA actual aprox. <strong>31,4%</strong></div></div><div class="wf-main"><div class="mini">Waterfall ejecutivo</div><div class="wf-steps"><div class="wf-step plus"><div><div class="name">IA logística transversal</div><div class="desc">Menor gasto · optimización de rutas, menos kilómetros y menor visita innecesaria.</div></div><div class="value">+3,8 pts</div></div><div class="connector"></div><div class="wf-step plus"><div><div class="name">Servicio adaptativo</div><div class="desc">Menor gasto · frecuencia correcta, capacidad liberada y mayor productividad operacional.</div></div><div class="value">+2,9 pts</div></div><div class="connector"></div><div class="wf-step plus"><div><div class="name">Nuevos modelos comerciales</div><div class="desc">Mayor ingreso · Estándar Inteligente, Mantenimiento Predictivo y Tarifa Flexible.</div></div><div class="value">+7,1 pts</div></div><div class="connector"></div><div class="wf-step minus"><div><div class="name">Conectividad, habilitación y mantención</div><div class="desc">Mayor gasto · conectividad, soporte operativo y mantención física de equipos.</div></div><div class="value">−1,6 pts</div></div></div></div><div class="sidebox" style="background:linear-gradient(180deg, rgba(89,221,198,.10), rgba(121,166,255,.06));border-color:rgba(89,221,198,.22)"><div class="mini">Resultado</div><div class="h2">EBITDA Smart mensual</div><div class="big">$436 MM</div><div class="body"><strong style="color:#117967">+$121,9 MM / mes</strong><br>Margen EBITDA aprox. <strong>43,6%</strong><br><strong>+12,2 pts</strong> de margen</div></div></div><div class="signal" style="margin-top:14px"><div class="bar"></div><div class="txt" style="font-size:24px">Esto no mejora porque ahorramos más.<span>Mejora porque dejamos de capturar margen como commodity.</span></div></div><div class="footer"><div class="brand">06 · EBITDA WATERFALL</div><div>Cifras aproximadas basadas en sensibilidad + data real + supuestos</div></div></div></div></section>
+
+  <section class="slide"><div class="canvas"><div class="inner"><div class="top"><div><div class="eyebrow"><span class="dot"></span> Escenarios</div><div class="title">Incluso siendo conservadores, el negocio mejora fuerte</div><div class="subtitle">La robustez del modelo no depende de un escenario perfecto.</div></div><div class="number">07</div></div><div class="grow scenario-layout"><div class="scenario-viz"><div class="scenario-bars" style="height:260px;align-items:flex-end;"><div class="sg"><div class="barstack"><div class="bar-a"></div><div class="bar-b b1"></div></div><div class="lab">Conservador<strong>+6,1 pts</strong></div></div><div class="sg"><div class="barstack"><div class="bar-a"></div><div class="bar-b b2"></div></div><div class="lab">Caso base<strong>+12,2 pts</strong></div></div><div class="sg"><div class="barstack"><div class="bar-a"></div><div class="bar-b b3"></div></div><div class="lab">Optimista<strong>+16,8 pts</strong></div></div></div><div class="signal" style="margin-top:28px"><div class="bar"></div><div class="txt" style="font-size:30px">La mejora no depende de un escenario perfecto.<span>Depende de corregir una estructura que hoy pierde margen todos los días.</span></div></div></div></div><div class="footer"><div class="brand">07 · SCENARIOS</div><div>Cifras aproximadas sobre sensibilidad del modelo</div></div></div></div></section>
+
+  
+
+  <section class="slide"><div class="canvas"><div class="inner"><div class="top"><div><div class="eyebrow"><span class="dot"></span> Nueva oferta comercial</div><div class="title">La competencia no puede replicar esto operando a ciegas</div><div class="subtitle">El mismo activo puede capturar valor distinto según cómo se opera y cómo se cobra.</div></div><div class="number">08</div></div><div class="grow offers"><div class="offer"><div class="mini">Modelo 1</div><div class="name">Estándar Inteligente</div><div class="one">Mantiene competitividad en precio, pero mejora margen base con frecuencia optimizada y trazabilidad operacional.</div><div class="list"><div class="item"><span class="bullet">✓</span><span>Frecuencia según uso real</span></div><div class="item"><span class="bullet">✓</span><span>Menor costo estructural</span></div><div class="item"><span class="bullet">✓</span><span>Base de eficiencia de cartera</span></div></div></div><div class="offer featured"><div class="mini">Modelo 2</div><div class="name">Mantenimiento Predictivo</div><div class="one">No es un servicio más caro. Es un servicio con menor riesgo operacional para el cliente.</div><div class="list"><div class="item"><span class="bullet">✓</span><span>Monitoreo de uso real</span></div><div class="item"><span class="bullet">✓</span><span>Mantención antes del reclamo</span></div><div class="item"><span class="bullet">✓</span><span>Menor riesgo operacional cliente</span></div></div><div class="quote-box" style="margin-top:14px">“Si el baño se ocupa poco, voy igual. Si se ocupa mucho, voy igual. Con este nuevo sistema voy cuando es necesario para que el baño permanezca limpio.”</div></div><div class="offer"><div class="mini">Modelo 3</div><div class="name">Tarifa Flexible</div><div class="one">Menor fijo + uso real. Permite capturar clientes sensibles a precio sin destruir margen en clientes subutilizados.</div><div class="list"><div class="item"><span class="bullet">✓</span><span>Elimina subsidios cruzados</span></div><div class="item"><span class="bullet">✓</span><span>Pricing más coherente</span></div><div class="item"><span class="bullet">✓</span><span>Mayor penetración comercial</span></div></div></div></div><div class="footer"><div class="brand">09 · OFFER PORTFOLIO</div><div>Una oferta imposible de copiar sin información</div></div></div></div></section>
+
+  <section class="slide"><div class="canvas"><div class="inner"><div class="top"><div><div class="eyebrow"><span class="dot"></span> Visión y pragmatismo</div><div class="title">No proponemos 10.000 ahora. Proponemos validar la primera unidad económica escalable.</div><div class="subtitle">La visión es total. La decisión comienza donde el valor puede demostrarse con evidencia real y pragmatismo operacional.</div></div><div class="number">09</div></div><div class="grow bridge"><div class="card"><div class="mini">Visión estratégica</div><div class="big-num">10.000</div><div class="body">sanitarios como horizonte de transformación del negocio</div><div class="list"><div class="item"><span class="bullet">✓</span><span>Transformación nacional</span></div><div class="item"><span class="bullet">✓</span><span>Diferenciación internacional</span></div><div class="item"><span class="bullet">✓</span><span>Nueva economía sanitaria</span></div></div></div><div class="card" style="background:linear-gradient(180deg, rgba(89,221,198,.10), rgba(121,166,255,.06));border-color:rgba(89,221,198,.22)"><div class="mini">Decisión real</div><div class="big-num">1.000</div><div class="body">sanitarios como primera unidad económica escalable</div><div class="list"><div class="item"><span class="bullet">✓</span><span>Validación económica real</span></div><div class="item"><span class="bullet">✓</span><span>Monetización comprobable</span></div><div class="item"><span class="bullet">✓</span><span>Base para escalar por zonas</span></div></div></div></div><div class="footer"><div class="brand">10 · FIRST SCALABLE UNIT</div><div>No se escala por fe. Se escala por evidencia.</div></div></div></div></section>
+
+  <section class="slide"><div class="canvas"><div class="inner"><div class="top"><div><div class="eyebrow"><span class="dot"></span> Roadmap</div><div class="title">Escalar no es instalar más. Es convertir evidencia en una nueva línea de negocio.</div><div class="subtitle">Cada fase valida una decisión de negocio, no una decisión tecnológica.</div></div><div class="number">10</div></div><div class="grow phases"><div class="phase"><div class="n">1</div><div class="t">10 sanitarios</div><div class="time">3 meses</div><div class="body">Instalación inicial, conectividad, primeras señales de uso real y construcción de plataforma.</div></div><div class="phase-arrow"><div>→</div></div><div class="phase"><div class="n">2</div><div class="t">100 sanitarios</div><div class="time">3 meses</div><div class="body">Calibración de modelos, optimización de rutas y primeros indicadores de eficiencia.</div></div><div class="phase-arrow"><div>→</div></div><div class="phase"><div class="n">3</div><div class="t">1.000 sanitarios</div><div class="time">6 meses</div><div class="body">Monetización real, mantenimiento predictivo, tarifa flexible y medición de margen.</div></div><div class="phase-arrow"><div>→</div></div><div class="phase"><div class="n">4</div><div class="t">Escalamiento por zonas</div><div class="time">Progresivo</div><div class="body">Despliegue por zonas operativas Ambipar e integración estructural al negocio.</div></div></div><div class="signal" style="margin-top:16px"><div class="bar"></div><div class="txt" style="font-size:24px">No se escala porque funciona.<span>Se escala porque genera margen.</span></div></div><div class="footer"><div class="brand">11 · ROADMAP</div><div>10 → 100 → 1.000 → zonas</div></div></div></div></section>
+
+  <section class="slide"><div class="canvas"><div class="inner"><div class="top"><div><div class="eyebrow"><span class="dot"></span> Inversión para empezar</div><div class="title">La inversión para empezar es acotada. El upside potencial no.</div><div class="subtitle">Cifras aproximadas para activar la primera unidad económica escalable de 1.000 sanitarios.</div></div><div class="number">11</div></div><div class="grow investment"><div class="card"><div class="mini">Escalado por etapas</div><div class="tiers"><div class="tier"><div class="step">Etapa 1</div><div class="q">10</div><div class="body">sanitarios</div></div><div class="tier"><div class="step">Etapa 2</div><div class="q">100</div><div class="body">sanitarios</div></div><div class="tier"><div class="step">Etapa 3</div><div class="q">1.000</div><div class="body">sanitarios</div></div></div><div class="calc-grid"><div class="calc"><div class="k">Hardware</div><div class="v">~$200.000</div><div class="body">CLP por unidad</div></div><div class="calc"><div class="k">Gasto mensual</div><div class="v">~$5.500</div><div class="body">CLP por unidad / mes<br>conectividad, habilitación operativa y mantención</div></div><div class="calc"><div class="k">CAPEX 1.000</div><div class="v">~$201 MM</div><div class="body">Proyecto 1.000 sanitarios</div></div><div class="calc"><div class="k">Payback 1.000</div><div class="v green">~8,3 meses</div><div class="body">Payback total del proyecto de 1.000 unidades</div></div></div></div><div style="display:flex;flex-direction:column;gap:16px"><div class="free-box"><div class="mini">Desarrollo y habilitación</div><div class="h2">Costo cero para Ambipar</div><div class="body">One Mind asume 100% el desarrollo y habilitación de la plataforma en esta etapa inicial, apostando al escalado futuro.</div></div><div class="card"><div class="mini">Apuesta conjunta</div><div class="signal" style="margin-top:10px"><div class="bar"></div><div class="txt" style="font-size:24px">Ambipar activa hardware y operación.<span>One Mind apuesta la capa de software, inteligencia y habilitación al crecimiento conjunto.</span></div></div></div><div class="card"><div class="mini">Apuesta conjunta</div><div class="body">Ambipar activa CAPEX y operación para capturar una nueva unidad económica. One Mind invierte desarrollo, inteligencia y habilitación apostando al escalado conjunto del negocio.</div></div></div></div><div class="footer"><div class="brand">12 · INVESTMENT</div><div>Cifras aproximadas para activar la primera unidad económica escalable</div></div></div></div></section>
+
+  <section class="slide"><div class="canvas"><div class="inner"><div class="top"><div><div class="eyebrow"><span class="dot"></span> Decisión</div><div class="title">La pregunta no es si hacemos esto. Es cuánto cuesta esperar.</div><div class="subtitle">Hay una expansión potente de margen en el negocio. El siguiente paso es activarla estratégicamente juntos.</div></div><div class="number">12</div></div><div class="grow decision"><div><div class="metrics-2"><div class="decision-card"><div class="mini">EBITDA actual mensual</div><div class="v">$314 MM</div><div class="body">Margen EBITDA actual aprox. <strong>31,4%</strong></div></div><div class="decision-card"><div class="mini">EBITDA Smart mensual</div><div class="v">$436 MM</div><div class="body"><strong style="color:#117967">+$121,9 MM / mes</strong><br><strong>43,6%</strong> de margen EBITDA aprox.</div></div></div><div class="decision-card" style="margin-top:16px"><div class="mini">Lo que queremos cerrar hoy</div><div class="list"><div class="item"><span class="bullet">✓</span><span>Compromiso para avanzar 10 → 100 → 1.000</span></div><div class="item"><span class="bullet">✓</span><span>Validar la primera unidad económica escalable</span></div><div class="item"><span class="bullet">✓</span><span>Construir juntos el siguiente paso estratégico del negocio sanitario</span></div></div></div></div><div style="display:flex;flex-direction:column;gap:16px"><div class="cta"><div class="mini">Mensaje final</div><div class="bigline">No estamos proponiendo un piloto tecnológico.<br>Estamos proponiendo una expansión estructural de margen.</div><div class="body" style="margin-top:14px">La oportunidad ya está identificada. El siguiente paso es avanzar juntos a la primera unidad económica escalable.</div></div><div class="decision-card"><div class="signal" style="margin-top:4px"><div class="bar"></div><div class="txt">Seguir operando igual también es una decisión.<span>Y probablemente la más cara.</span></div></div></div></div></div><div class="footer"><div class="brand">13 · CLOSE</div><div>La expansión de margen es potente. El siguiente paso es estratégico.</div></div></div></div></section>
+
+</div>
+```
+
+  </div>
+
+  <div class="top-nav"><button id="overviewBtn">Overview</button><button id="printBtn">PDF</button></div>
+  <div class="nav"><button id="prevBtn">‹</button><div class="counter" id="counter">1 / 12</div><div class="dots" id="dots"></div><button id="nextBtn">›</button></div>
+
+  <script>
+    const slides = document.getElementById('slides');
+    const total = slides.children.length;
+    const dotsWrap = document.getElementById('dots');
+    const counter = document.getElementById('counter');
+    let current = 0; let overview = false;
+    for(let i=0;i<total;i++){ const d=document.createElement('div'); d.className='dotnav'+(i===0?' active':''); d.addEventListener('click',()=>goTo(i)); dotsWrap.appendChild(d); }
+    function update(){ slides.style.transform = overview ? `scale(.28) translate(${(current*-100)/.28}vw, 0)` : `translateX(-${current*100}vw)`; [...dotsWrap.children].forEach((d,i)=>d.classList.toggle('active', i===current)); counter.textContent = `${current+1} / ${total}`; }
+    function goTo(i){ current=Math.max(0,Math.min(total-1,i)); overview=false; update(); }
+    function next(){ goTo(current+1); } function prev(){ goTo(current-1); }
+    document.getElementById('nextBtn').onclick=next; document.getElementById('prevBtn').onclick=prev; document.getElementById('printBtn').onclick=()=>window.print(); document.getElementById('overviewBtn').onclick=()=>{ overview=!overview; if(overview){ slides.style.transform='scale(.28)'; } else { update(); } };
+    window.addEventListener('keydown', e=>{ if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' '){ e.preventDefault(); next(); } if(e.key==='ArrowLeft'||e.key==='PageUp'){ e.preventDefault(); prev(); } if(e.key.toLowerCase()==='o'){ overview=!overview; if(overview){ slides.style.transform='scale(.28)'; } else { update(); } } if(e.key.toLowerCase()==='p'){ window.print(); } if(e.key==='Home'){ goTo(0); } if(e.key==='End'){ goTo(total-1); } if(e.key==='Escape' && overview){ overview=false; update(); } });
+    let startX=0; window.addEventListener('touchstart', e=>{ startX=e.touches[0].clientX; }, {passive:true}); window.addEventListener('touchend', e=>{ const dx=e.changedTouches[0].clientX-startX; if(Math.abs(dx)>60){ dx<0?next():prev(); } }, {passive:true}); update();
+  </script>
+
+</body>
+</html>
